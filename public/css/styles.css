@@ -9,6 +9,7 @@ h1, h2, h3 {
     font-family: 'Tenor Sans', sans-serif;
 }
 
+/* Sets image as greyscale, for when achievememts are not attained. */
 .unachieved {
     filter: gray; /* IE6-9 */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
@@ -16,8 +17,8 @@ h1, h2, h3 {
     width: 20%;
     height: 20%;
 }
-  
-  /* Disable grayscale on hover */
+
+/* Disable grayscale on hover */
 .unachieved:hover {
     -webkit-filter: grayscale(0);
     filter: none;
