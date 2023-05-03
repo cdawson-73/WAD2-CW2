@@ -23,7 +23,7 @@ class UserDao {
         const that = this.uDb;
         bcrypt.hash(password, saltRounds).then(function(hash) {
             var entry = {
-                user: username,
+                username: username,
                 password: hash
             };
             that.insert(entry, function(err) {
