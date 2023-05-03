@@ -37,7 +37,7 @@ class UserDao {
     }
 
     lookup(user, cb) {
-        this.uDb.find({"user": user}, function(err, entries) {
+        this.uDb.find({"username": user}, function(err, entries) {
             if (err) {
                 return cb(null, null);
             } else {
