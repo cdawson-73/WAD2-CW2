@@ -36,8 +36,8 @@ exports.show_login = function(req, res) {
 auth.authorize("/login");
 
 exports.post_login = function(req, res) {
-    console.log("User signed in.")
-    res.redirect("/loggedIn");
+    console.log(req.user.user, "signed in.");
+    res.redirect("/account");
    };
 
 exports.show_signup = function(req, res) {
@@ -65,6 +65,14 @@ exports.post_new_user = function(req, res) {
     console.log("Register", username, "with password", password);
     res.redirect('/login');
    });
+}
+
+exports.show_account = function(req, res) {
+    res.render("user/logged-in/account", {
+        "title": "Account",
+        "user": req.user,
+        "name": req.user.user,
+    });
 }
 
 exports.logout = function(req, res, next) {

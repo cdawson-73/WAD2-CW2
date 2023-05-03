@@ -13,11 +13,13 @@ router.get("/loggedIn/about", loginCheck.ensureLoggedIn("/about"), controller.sh
 router.get("/useful-links", loginCheck.ensureLoggedOut("/loggedIn/useful-links"), controller.show_usefull);
 router.get("/loggedIn/useful-links", loginCheck.ensureLoggedIn("/useful-links"), controller.show_usefull);
 
-router.get("/login", loginCheck.ensureLoggedOut("/loggedIn"), controller.show_login);
+router.get("/login", loginCheck.ensureLoggedOut("/account"), controller.show_login);
 router.post("/login", auth.authorize("/login"), controller.post_login);
 
 router.get("/signup", loginCheck.ensureLoggedOut("/loggedIn"), controller.show_signup);
 router.post("/signup", controller.post_new_user);
+
+router.get("/account", loginCheck.ensureLoggedIn("/login"), controller.show_account);
 
 router.get("/logout", controller.logout);
 
