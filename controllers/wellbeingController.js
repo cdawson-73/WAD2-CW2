@@ -80,7 +80,7 @@ exports.logout = function(req, res, next) {
         if (err) {
             return next(err);
         }
-        console.log(req.user.username, "signed out.")
+        console.log("User signed out.")
         res.clearCookie('connect.sid', {
             path: "/",
             httpOnly: true,
