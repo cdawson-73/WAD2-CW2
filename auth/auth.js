@@ -7,18 +7,18 @@ const userModel = new userDAO();
 exports.init = function(app) {
     passport.use(new Strategy(
         function(username, password, cb) {
-            userModel.lookup(username, function(err, user) {
+            userModel.lookup(username, function(err, username) {
                 if (err) {
                     console.log("Error finding user.", err);
                     return cb(err);
                 }
-                if (!user) {
+                if (!username) {
                     console.log("User ", username, " not found.");
                     return cb(null, false);
                 }
-                bcrypt.compare(password, user.password, function(err, result) {
+                bcrypt.compare(password, username.password, function(err, result) {
                     if (result) {
-                        cb(null, user);
+                        cb(null, username);
                     } else {
                         cb(null, false);
                     }
@@ -26,15 +26,15 @@ exports.init = function(app) {
             });
         }
     ));
-    passport.serializeUser(function(user, cb) {
-        cb(null, user.user);
+    passport.serializeUser(function(username, cb) {
+        cb(null, username.username);
     });
     passport.deserializeUser(function(id, cb) {
-        userModel.lookup(id, function(err, user) {
+        userModel.lookup(id, function(err, username) {
             if (err) {
                 return cb(err);
             }
-            cb(null, user);
+            cb(null, username);
         });
     });
     app.use(passport.initialize());
