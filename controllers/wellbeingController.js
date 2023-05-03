@@ -6,50 +6,31 @@ const {ensureLoggedIn} = require("connect-ensure-login");
 //const db = new wellbeingDAO();
 //db.init();
 
-exports.show_guest_homepage = function(req, res) {
-    res.render("guest/home"), {
+exports.show_homepage = function(req, res) {
+    res.render("guest/home", {
         "title": "Wellbeing HQ",
-    };
+        "user": req.user,
+    });
 }
 
-exports.show_user_homepage = function(req, res) {
-    res.render("user/logged-in/home"), {
-        "title": "Wellbeing HQ",
-        "user": req.user
-    };
-}
-
-exports.show_guest_about = function(req, res) {
-    res.render("guest/about"), {
-        "title": "About Us"
-    };
-};
-
-
-exports.show_user_about = function(req, res) {
-    res.render("user/logged-in/about"), {
+exports.show_about = function(req, res) {
+    res.render("guest/about", {
         "title": "About Us",
-        "user": req.user
-    };
+        "user": req.user,
+    });
 };
 
-exports.show_guest_usefull = function(req, res) {
-    res.render("guest/useful-links"), {
-        "title": "Usefull Links"
-    };
-}
-
-exports.show_user_usefull = function(req, res) {
-    res.render("user/logged-in/useful-links"), {
+exports.show_usefull = function(req, res) {
+    res.render("guest/useful-links", {
         "title": "Usefull Links",
-        "user": req.user
-    };
+        "user": req.user,
+    });
 }
 
 exports.show_login = function(req, res) {
-    res.render("user/login"), {
+    res.render("user/login", {
         "title": "Login"
-    };
+    });
 }
 
 auth.authorize("/login");
@@ -60,9 +41,9 @@ exports.post_login = function(req, res) {
    };
 
 exports.show_signup = function(req, res) {
-    res.render("user/register"), {
+    res.render("user/register", {
         "title": "Sign Up"
-    };
+    });
 }
 
 exports.post_new_user = function(req, res) {
@@ -100,8 +81,9 @@ exports.logout = function(req, res, next) {
     });
 }
 
-exports.notFound = function(req, res) {
-    res.render("not-found"), {
-        "title": "Wellbeing HQ"
-    };
+exports.not_found = function(req, res) {
+    res.render("guest/not-found", {
+        "title": "Wellbeing HQ",
+        "user": req.user,
+    });
 }
