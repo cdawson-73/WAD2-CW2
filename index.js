@@ -6,8 +6,8 @@ app.use(express.urlencoded( {
 }));
 
 const path = require("path");
-const public = path.join(__dirname);
-//app.use(express.static(public));
+const public = path.join(__dirname, "public");
+app.use(express.static(public));
 
 const session = require("express-session");
 const auth = require("./auth/auth.js");
