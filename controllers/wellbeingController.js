@@ -36,7 +36,7 @@ exports.show_login = function(req, res) {
 auth.authorize("/login");
 
 exports.post_login = function(req, res) {
-    console.log(req.user.user, "signed in.");
+    console.log(req.user.username, "signed in.");
     res.redirect("/account");
    };
 
@@ -71,7 +71,7 @@ exports.show_account = function(req, res) {
     res.render("user/logged-in/account", {
         "title": "Account",
         "user": req.user,
-        "name": req.user.user,
+        "name": req.user.username,
     });
 }
 
@@ -80,7 +80,7 @@ exports.logout = function(req, res, next) {
         if (err) {
             return next(err);
         }
-        console.log("User signed out.")
+        console.log(req.user.username, "signed out.")
         res.clearCookie('connect.sid', {
             path: "/",
             httpOnly: true,
