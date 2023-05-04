@@ -1,0 +1,43 @@
+{{>page-partials/header}}
+<h1>Goals</h1>
+<h2>Users Only</h2>
+<h3>Welcome {{name}}</h3>
+<h3><a href="/add-goal">Add New Goal</a></h3>
+<div class="">
+    {{#goals}}
+        <div class="">
+            {{name}}
+        </div>
+        <div class="">
+            {{type}}
+        </div>
+        <div class="">
+            {{repeat}}
+        </div>
+        <div class="">
+            {{complete}}
+        </div>
+        <div class="">
+            {{dateCreated}}
+        </div>
+        <div class="">
+            {{dateSet}}
+        </div>
+        <div class="">
+            {{dateComplete}}
+        </div>
+        <div class="">
+            {{description}}
+        </div>
+        <div class="">
+            {{id}}
+        </div>
+        <br>
+    {{/goals}}
+    {{^goals}}
+        <div class="">
+            You have not set any goals.
+        </div>
+    {{/goals}}
+</div>
+{{>page-partials/footer}}
