@@ -117,7 +117,7 @@ exports.show_goals = function(req, res) {
     res.render("user/logged-in/goals", {
         "title": "Goals",
         "user": req.user,
-        "goals": req.user.goals,
+        "goals": goals,
     });
 }
 
