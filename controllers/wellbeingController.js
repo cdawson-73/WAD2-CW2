@@ -83,6 +83,44 @@ exports.show_achievements = function(req, res) {
     });
 }
 
+exports.show_new_goal = function(req, res) {
+    res.render("user/logged-in/add-goal", {
+        "title": "Add New Goal",
+        "user": req.user,
+    });
+}
+
+exports.post_new_goal = function(req, res) {
+    const username = req.user.username;
+    const name = req.body.name;
+    const type = req.body.type;
+    const repeat = req.body.repeat;
+    const complete = "false";
+    const dateCreated = Date.now();
+    const dateSet = req.body.date;
+    const dateComplete = "null";
+    const description = req.body.description;
+    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+
+    if (!name || !type || !repeat || !dateSet || !description) {
+        res.sendStatus(401);
+        console.log("All fields not complete.")
+        return;
+    }
+    user.addGoal(username, name, type, repeat, complete, dateCreated, dateSet, dateComplete, description, id);
+    res.redirect('/goals');
+}
+
+exports.show_goals = function(req, res) {
+    var username = req.user.username;
+    var goals = req.user.goals;
+    res.render("user/logged-in/goals", {
+        "title": "Goals",
+        "user": req.user,
+        "goals": req.user.goals,
+    });
+}
+
 exports.logout = function(req, res, next) {
     req.logout(function(err) {
         if (err) {
