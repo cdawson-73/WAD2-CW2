@@ -1,7 +1,9 @@
 const path = require("path");
 const nedb = require("nedb");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const { achievements } = require("./achievementModel.js");
+
 
 class UserDao {
     constructor(dbFilePath) {
@@ -19,18 +21,32 @@ class UserDao {
             });
         }
     }
+
     create(username, password) {
         const that = this.uDb;
         bcrypt.hash(password, saltRounds).then(function(hash) {
+            /*var achievements = {
+                first: {
+                    name: "first",
+                    image: "/img/achievements/general/set/1-general-set.png",
+                    type: "general",
+                    achieved: "false",
+                    dateAchieved: "null",
+                    description: "This is the first achievement.",
+                }
+            };*/
+            
             var entry = {
                 username: username,
-                password: hash
+                password: hash,
+                achievements: achievements,
             };
             that.insert(entry, function(err) {
                 if (err) {
                     console.log("Can't insert user: ", username);
                 } else {
                     console.log("User created.");
+                    console.log(achievements);
                 }
             });
         });
@@ -50,4 +66,4 @@ class UserDao {
     }
 }
 
-module.exports = UserDao;
+module.exports = new UserDao();

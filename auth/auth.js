@@ -1,24 +1,23 @@
 const passport = require("passport");
 const Strategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
-const userDAO = require("../models/userModel.js");
-const userModel = new userDAO();
+const userModel = require("../models/userModel.js");
 
 exports.init = function(app) {
     passport.use(new Strategy(
         function(username, password, cb) {
-            userModel.lookup(username, function(err, username) {
+            userModel.lookup(username, function(err, user) {
                 if (err) {
                     console.log("Error finding user.", err);
                     return cb(err);
                 }
-                if (!username) {
+                if (!user) {
                     console.log("User ", username, " not found.");
                     return cb(null, false);
                 }
-                bcrypt.compare(password, username.password, function(err, result) {
+                bcrypt.compare(password, user.password, function(err, result) {
                     if (result) {
-                        cb(null, username);
+                        cb(null, user);
                     } else {
                         cb(null, false);
                     }
@@ -26,15 +25,15 @@ exports.init = function(app) {
             });
         }
     ));
-    passport.serializeUser(function(username, cb) {
-        cb(null, username.username);
+    passport.serializeUser(function(user, cb) {
+        cb(null, user.username);
     });
     passport.deserializeUser(function(id, cb) {
-        userModel.lookup(id, function(err, username) {
+        userModel.lookup(id, function(err, user) {
             if (err) {
                 return cb(err);
             }
-            cb(null, username);
+            cb(null, user);
         });
     });
     app.use(passport.initialize());
