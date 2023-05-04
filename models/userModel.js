@@ -2,7 +2,7 @@ const path = require("path");
 const nedb = require("nedb");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-const { achievements } = require("./achievementModel.js");
+const { achieve } = require("./achievementModel.js");
 
 
 class UserDao {
@@ -39,14 +39,14 @@ class UserDao {
             var entry = {
                 username: username,
                 password: hash,
-                achievements: achievements,
+                //achievements: achievements,
             };
             that.insert(entry, function(err) {
                 if (err) {
                     console.log("Can't insert user: ", username);
                 } else {
                     console.log("User created.");
-                    console.log(achievements);
+                    console.log(achieve());
                 }
             });
         });
