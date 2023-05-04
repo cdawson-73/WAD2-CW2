@@ -32,6 +32,7 @@ auth.authorize("/login");
 
 exports.post_login = function(req, res) {
     console.log(req.user.username, "signed in.");
+    
     res.redirect("/account");
    };
 
@@ -71,12 +72,14 @@ exports.show_account = function(req, res) {
 }
 
 exports.show_achievements = function(req, res) {
+    var username = req.user.username;
+    var achievements = req.user.achievements;
+    console.log(achievements.length);
     res.render("user/logged-in/achievements", {
         "title": "Achievements",
         "user": req.user,
-        "name": req.user.username,
-        "first": req.user.achievements.first.image,
-        "achieved": req.user.achievements.first.achieved,
+        "name": username,
+        "achievements": achievements,
     });
 }
 
