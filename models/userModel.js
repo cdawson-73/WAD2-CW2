@@ -53,6 +53,33 @@ class UserDao {
             }
         });
     }
+
+    addGoal(username, name, type, repeat, complete, dateCreated, dateSet, dateComplete, description, id) {
+        this.uDb.update({
+            username: username}
+            ,{
+                $push:{
+                    goals: {
+                        name: name,
+                        type: type,
+                        repeat: repeat,
+                        complete: complete,
+                        dateCreated: dateCreated,
+                        dateSet: dateSet,
+                        dateComplete: dateComplete,
+                        description: description,
+                        id: id,
+                    }
+                }
+            },
+            function(err,docs){
+                if(err){
+                    console.log('error updating documents',err);
+                } else {
+                    console.log(docs,'documents updated')
+                }
+            });
+    }
 }
 
 module.exports = new UserDao();
