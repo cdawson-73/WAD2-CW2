@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 * {
+    /*border: 1px solid red;*/
     font-family: "Arsenal", serif;
 }
 
@@ -14,12 +15,30 @@ h1, h2, h3 {
     filter: gray; /* IE6-9 */
     -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
     filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
-    width: 20%;
-    height: 20%;
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
 }
 
-/* Disable grayscale on hover */
-.unachieved:hover {
-    -webkit-filter: grayscale(0);
-    filter: none;
+.achieved {
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.achievement-images {
+    display: flex;
+    flex-wrap: wrap;
+    width: 385px;
+}
+
+.achievement-images > * {
+    width: 33%;
+    height: 33%;
+}
+
+.achievement-images > div > * {
+    border-radius: 25px;
+    width: 100%;
+    height: 100%;
 }
