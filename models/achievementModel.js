@@ -1,18 +1,23 @@
 exports.achieve = function(){
 
-const achievements = {
-        oneGenSet: {
-            name: "",
+const achievements = [
+         {
+            name: "one",
             image: "/img/achievements/general/set/1-general-set.png",
             type: "general",
             achieved: "false",
             dateAchieved: "null",
             description: "",
         },
-        /*tenGenSet: {
-
+        {
+            name: "two",
+            image: "/img/achievements/general/set/1-general-set.png",
+            type: "general",
+            achieved: "false",
+            dateAchieved: "null",
+            description: "",
         },
-        twenGenSet: {
+        /*twenGenSet: {
 
         },
         oneGenCom: {
@@ -81,7 +86,7 @@ const achievements = {
         final: {
 
         }*/
-    }
+]
     return achievements;
 }
     //module.exports = achievements;

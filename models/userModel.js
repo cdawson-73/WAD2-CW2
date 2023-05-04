@@ -25,16 +25,7 @@ class UserDao {
     create(username, password) {
         const that = this.uDb;
         bcrypt.hash(password, saltRounds).then(function(hash) {
-            /*var achievements = {
-                first: {
-                    name: "first",
-                    image: "/img/achievements/general/set/1-general-set.png",
-                    type: "general",
-                    achieved: "false",
-                    dateAchieved: "null",
-                    description: "This is the first achievement.",
-                }
-            };*/
+            var achievements = achieve();
             
             var entry = {
                 username: username,
@@ -46,7 +37,7 @@ class UserDao {
                     console.log("Can't insert user: ", username);
                 } else {
                     console.log("User created.");
-                    console.log(achieve());
+                    console.log(achievements[0]);
                 }
             });
         });
