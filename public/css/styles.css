@@ -10,6 +10,18 @@ h1, h2, h3 {
     font-family: 'Tenor Sans', sans-serif;
 }
 
+.achievements {
+    display: flex;
+    flex-direction: column;
+}
+
+.achievements > * {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Achivement image styling. */
+
 /* Sets image as greyscale, for when achievememts are not attained. */
 .unachieved {
     filter: gray; /* IE6-9 */
@@ -18,27 +30,62 @@ h1, h2, h3 {
     border-radius: 25px;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
 .achieved {
     border-radius: 25px;
     width: 100%;
     height: 100%;
+    position: relative;
 }
 
-.achievement-images {
-    display: flex;
-    flex-wrap: wrap;
-    width: 385px;
-}
-
-.achievement-images > * {
-    width: 33%;
-    height: 33%;
-}
-
-.achievement-images > div > * {
+.achieved > *, .unachieved > * {
     border-radius: 25px;
     width: 100%;
     height: 100%;
 }
+
+.achievement-images {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+}
+
+.achievement-images > * {
+    width: 16%;
+    height: 16%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #008CBA;
+  }
+  
+  .achieved:hover .overlay {
+    opacity: 1;
+  }
+  .unachieved:hover .overlay {
+    opacity: 1;
+  }
+
+  .image-overlay-text {
+    color: white;
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
