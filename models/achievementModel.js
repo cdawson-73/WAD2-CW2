@@ -1,3 +1,5 @@
+exports.achieve = function(){
+
 const achievements = {
         oneGenSet: {
             name: "",
@@ -80,5 +82,6 @@ const achievements = {
 
         }*/
     }
-
-    module.exports = achievements;
+    return achievements;
+}
+    //module.exports = achievements;
