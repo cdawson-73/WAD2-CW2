@@ -1,1 +1,1 @@
-//module.exports = WellbeingDAO;
+//module.exports = new WellbeingDAO();
