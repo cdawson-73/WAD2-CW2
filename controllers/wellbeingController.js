@@ -1,10 +1,5 @@
-//const wellbeingDAO = require("../models/wellbeingModel.js");
-const userDAO = require("../models/userModel.js");
-const user = new userDAO();
+const user = require("../models/userModel.js");
 const auth = require("../auth/auth.js");
-const {ensureLoggedIn} = require("connect-ensure-login");
-//const db = new wellbeingDAO();
-//db.init();
 
 exports.show_homepage = function(req, res) {
     res.render("guest/home", {
@@ -48,7 +43,7 @@ exports.show_signup = function(req, res) {
 
 exports.post_new_user = function(req, res) {
     const username = req.body.username;
-    const password = req.body.pass;
+    const password = req.body.password;
     
     if (!username || !password) {
         res.sendStatus(401);
@@ -75,16 +70,22 @@ exports.show_account = function(req, res) {
     });
 }
 
+exports.show_achievements = function(req, res) {
+    res.render("user/logged-in/achievements", {
+        "title": "Achievements",
+        "user": req.user,
+        "name": req.user.username,
+        "first": req.user.achievements.first.image,
+        "achieved": req.user.achievements.first.achieved,
+    });
+}
+
 exports.logout = function(req, res, next) {
     req.logout(function(err) {
         if (err) {
             return next(err);
         }
         console.log("User signed out.")
-        res.clearCookie('connect.sid', {
-            path: "/",
-            httpOnly: true,
-        });
         res.redirect("/");
     });
 }

@@ -19,6 +19,7 @@ router.post("/signup", controller.post_new_user);
 
 // User only pages.
 router.get("/account", loginCheck.ensureLoggedIn("/login"), controller.show_account);
+router.get("/achievements", loginCheck.ensureLoggedIn("/login"), controller.show_achievements);
 
 // Log out page.
 router.get("/logout", controller.logout);
