@@ -1,212 +1,9 @@
 exports.achieve = function(){
 
-    /* All achieved. 
-    const achievements = [
-        {
-            name: "First Goal Set",
-            image: "/img/achievements/general/set/1-general-set.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "You've set your first goal. 'A journey of a thousand miles begins with a single step.' - Laozi, legendary Chinese philosopher.",
-        },
-        {
-            name: "10 Goals Set",
-            image: "/img/achievements/general/set/10-general-set.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "10 goals set, this is ",
-        },
-        {
-            name: "20 Goals Set",
-            image: "/img/achievements/general/set/20-general-set.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Goal Complete",
-            image: "/img/achievements/general/complete/1-general-complete.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Goals Completed",
-            image: "/img/achievements/general/complete/10-general-complete.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Goals Completed",
-            image: "/img/achievements/general/complete/20-general-complete.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Fitness Goal Set",
-            image: "/img/achievements/fitness/set/1-fitness-set.png",
-            type: "fitness",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Fitness Goals Set",
-            image: "/img/achievements/fitness/set/10-fitness-set.png",
-            type: "fitness",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Fitness Goals Set",
-            image: "/img/achievements/fitness/set/20-fitness-set.png",
-            type: "fitness",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Fitness Goal Completed",
-            image: "/img/achievements/fitness/complete/1-fitness-complete.png",
-            type: "fitness",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Fitness Goals Completed",
-            image: "/img/achievements/fitness/complete/10-fitness-complete.png",
-            type: "fitness",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Fitness Goals Completed",
-            image: "/img/achievements/fitness/complete/20-fitness-complete.png",
-            type: "fitness",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Healthy-Living Goal Set",
-            image: "/img/achievements/health/set/1-health-set.png",
-            type: "healthy-living",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Healthy-Living Goals Set",
-            image: "/img/achievements/health/set/10-health-set.png",
-            type: "healthy-living",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Healthy Living Goals Set",
-            image: "/img/achievements/health/set/10-health-set.png",
-            type: "healthy-living",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Healthy-Living Goal Completed",
-            image: "/img/achievements/health/complete/1-health-complete.png",
-            type: "healthy-living",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Healthy-Living Goals Completed",
-            image: "/img/achievements/health/complete/10-health-complete.png",
-            type: "healthy-living",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Healthy-Living Goals Completed",
-            image: "/img/achievements/health/complete/20-health-complete.png",
-            type: "healthy-living",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Nutrition Goal Set",
-            image: "/img/achievements/nutrition/set/1-nutrition-set.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Nutrition Goals Set",
-            image: "/img/achievements/nutrition/set/10-nutrition-set.png",
-            type: "nutrition",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Nutrition Goals Set",
-            image: "/img/achievements/nutrition/set/20-nutrition-set.png",
-            type: "nutrition",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "First Nutrition Goal Completed",
-            image: "/img/achievements/nutrition/complete/1-nutrition-complete.png",
-            type: "nutrition",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "10 Nutrition Goals Completed",
-            image: "/img/achievements/nutrition/complete/10-nutrition-complete.png",
-            type: "nutrition",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "20 Nutrition Goals Completed",
-            image: "/img/achievements/nutrition/complete/20-nutrition-complete.png",
-            type: "",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-        {
-            name: "You've Completed It",
-            image: "/img/achievements/general/final-goal.png",
-            type: "general",
-            achieved: "achieved",
-            dateAchieved: "null",
-            description: "",
-        },
-    ]*/
-    
-    /* All unachieved. */
-    const achievements = [
-        {
+    // Achievements are automatically inserted into each user. Separated from userModel for clarity.
+
+    const achievements = {
+        one: {
             name: "First Goal Set",
             image: "/img/achievements/general/set/1-general-set.png",
             type: "general",
@@ -214,7 +11,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "You've set your first goal. 'A journey of a thousand miles begins with a single step.' - Laozi, legendary Chinese philosopher.",
         },
-        {
+        two: {
             name: "10 Goals Set",
             image: "/img/achievements/general/set/10-general-set.png",
             type: "general",
@@ -222,7 +19,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "10 goals set, this is ",
         },
-        {
+        three: {
             name: "20 Goals Set",
             image: "/img/achievements/general/set/20-general-set.png",
             type: "general",
@@ -230,7 +27,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        four: {
             name: "First Goal Complete",
             image: "/img/achievements/general/complete/1-general-complete.png",
             type: "general",
@@ -238,7 +35,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        five: {
             name: "10 Goals Completed",
             image: "/img/achievements/general/complete/10-general-complete.png",
             type: "general",
@@ -246,7 +43,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        six: {
             name: "20 Goals Completed",
             image: "/img/achievements/general/complete/20-general-complete.png",
             type: "general",
@@ -254,7 +51,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        seven: {
             name: "First Fitness Goal Set",
             image: "/img/achievements/fitness/set/1-fitness-set.png",
             type: "fitness",
@@ -262,7 +59,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        eight: {
             name: "10 Fitness Goals Set",
             image: "/img/achievements/fitness/set/10-fitness-set.png",
             type: "fitness",
@@ -270,7 +67,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        nine: {
             name: "20 Fitness Goals Set",
             image: "/img/achievements/fitness/set/20-fitness-set.png",
             type: "fitness",
@@ -278,7 +75,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        ten: {
             name: "First Fitness Goal Completed",
             image: "/img/achievements/fitness/complete/1-fitness-complete.png",
             type: "fitness",
@@ -286,7 +83,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        eleven: {
             name: "10 Fitness Goals Completed",
             image: "/img/achievements/fitness/complete/10-fitness-complete.png",
             type: "fitness",
@@ -294,7 +91,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twelve: {
             name: "20 Fitness Goals Completed",
             image: "/img/achievements/fitness/complete/20-fitness-complete.png",
             type: "fitness",
@@ -302,7 +99,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        thirteen: {
             name: "First Healthy-Living Goal Set",
             image: "/img/achievements/health/set/1-health-set.png",
             type: "healthy-living",
@@ -310,7 +107,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        fourteen: {
             name: "10 Healthy-Living Goals Set",
             image: "/img/achievements/health/set/10-health-set.png",
             type: "healthy-living",
@@ -318,7 +115,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        fifteen: {
             name: "20 Healthy Living Goals Set",
             image: "/img/achievements/health/set/10-health-set.png",
             type: "healthy-living",
@@ -326,7 +123,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        sixteen: {
             name: "First Healthy-Living Goal Completed",
             image: "/img/achievements/health/complete/1-health-complete.png",
             type: "healthy-living",
@@ -334,7 +131,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        seventeen: {
             name: "10 Healthy-Living Goals Completed",
             image: "/img/achievements/health/complete/10-health-complete.png",
             type: "healthy-living",
@@ -342,7 +139,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        eighteen: {
             name: "20 Healthy-Living Goals Completed",
             image: "/img/achievements/health/complete/20-health-complete.png",
             type: "healthy-living",
@@ -350,7 +147,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        nineteen: {
             name: "First Nutrition Goal Set",
             image: "/img/achievements/nutrition/set/1-nutrition-set.png",
             type: "general",
@@ -358,7 +155,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twenty: {
             name: "10 Nutrition Goals Set",
             image: "/img/achievements/nutrition/set/10-nutrition-set.png",
             type: "nutrition",
@@ -366,7 +163,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twentyone: {
             name: "20 Nutrition Goals Set",
             image: "/img/achievements/nutrition/set/20-nutrition-set.png",
             type: "nutrition",
@@ -374,7 +171,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twentytwo: {
             name: "First Nutrition Goal Completed",
             image: "/img/achievements/nutrition/complete/1-nutrition-complete.png",
             type: "nutrition",
@@ -382,7 +179,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twentythree: {
             name: "10 Nutrition Goals Completed",
             image: "/img/achievements/nutrition/complete/10-nutrition-complete.png",
             type: "nutrition",
@@ -390,7 +187,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twentyfour: {
             name: "20 Nutrition Goals Completed",
             image: "/img/achievements/nutrition/complete/20-nutrition-complete.png",
             type: "",
@@ -398,7 +195,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-        {
+        twentyfive: {
             name: "You've Completed It",
             image: "/img/achievements/general/final-goal.png",
             type: "general",
@@ -406,6 +203,7 @@ exports.achieve = function(){
             dateAchieved: "null",
             description: "",
         },
-    ]
+    }
+
     return achievements;
 }
