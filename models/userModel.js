@@ -3,6 +3,7 @@ const nedb = require("nedb");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const { achieve } = require("./achievementModel.js");
+const numWords = require("num-words")
 
 
 class UserDao {
@@ -29,6 +30,14 @@ class UserDao {
             var entry = {
                 username: username,
                 password: hash,
+                generalSet: 0,
+                generalComplete: 0,
+                fitnessSet: 0,
+                fitnessComplete: 0,
+                healthSet: 0,
+                healthComplete: 0,
+                nutritionSet: 0,
+                nutritionComplete: 0,
                 achievements: achievements,
             };
             that.insert(entry, function(err) {
@@ -55,9 +64,16 @@ class UserDao {
     }
 
     addGoal(username, name, type, repeat, complete, dateCreated, dateSet, dateComplete, description, id) {
-        this.uDb.update({
-            username: username}
-            ,{
+        var typeIncrement = type.concat("Set");
+        var db = this.uDb;
+        return new Promise((resolve, reject) => {
+        db.update({
+            username: username
+            },{
+                $inc: {
+                    [typeIncrement]: 1,
+                    generalSet: 1,
+                },
                 $push:{
                     goals: {
                         name: name,
@@ -72,13 +88,111 @@ class UserDao {
                     }
                 }
             },
-            function(err,docs){
+            function(err, goal){
                 if(err){
-                    console.log('error updating documents',err);
+                    reject(err);
                 } else {
-                    console.log(docs,'documents updated')
+                    resolve(goal);
+                    console.log("Goal added.")
                 }
             });
+            this.updateStatus(username);
+    })}
+
+    updateStatus(username) {
+        var db = this.uDb;
+        return new Promise((resolve, reject) => {
+            db.find({
+                username: username,
+            },{
+                generalSet: 1,
+                generalComplete: 1,
+                fitnessSet: 1,
+                fitnessComplete: 1,
+                healthSet: 1,
+                healthComplete: 1,
+                nutritionSet: 1,
+                nutritionComplete: 1,
+                _id: 0,
+            }, function(err, totals) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(totals);
+                    var goalTotals = Object.values(totals[0]);
+                    for (var i = 0, j = 0, k = 1, l = 2 ; i < goalTotals.length; i++, j += 3, k += 3, l += 3) {
+                        if (goalTotals[i] == 1) {
+                            var achieved = numWords(j+1);
+                            achieved = achieved.replace(/\s+/g, '');
+                            achieved = "achievements." + achieved + ".achieved"
+
+                    db.update({
+                        username: username
+                        },{
+                            $set:{
+                                [achieved]: "achieved"
+                            }
+                        }, function(err, docs) {
+                            if(err) {
+                                console.log('error updating documents',err);
+                            } else {
+                                console.log(docs,'documents updated')
+                            }
+                        });
+                    } else if (goalTotals[i] == 10) {
+                        var achieved = numWords(k+1);
+                        achieved = achieved.replace(/\s+/g, '');
+                        achieved = "achievements." + achieved + ".achieved"
+                        db.update({
+                            username: username
+                        },{
+                            $set:{
+                                [achieved]: "achieved"
+                            }
+                        }, function(err, docs) {
+                            if(err) {
+                                console.log('error updating documents',err);
+                            } else {
+                                console.log(docs,'documents updated')
+                            }
+                        });
+                    } else if (goalTotals[i] == 20) {
+                        var achieved = numWords(l+1);
+                        achieved = achieved.replace(/\s+/g, '');
+                        achieved = "achievements." + achieved + ".achieved"
+                        db.update({
+                            username: username
+                        },{
+                            $set:{
+                                [achieved]: "achieved"
+                            }
+                        }, function(err, docs) {
+                            if(err) {
+                                console.log('error updating documents',err);
+                                } else {
+                                console.log(docs,'documents updated')
+                                if (Math.min(...goalTotals) >= 20) {
+                                    db.update({
+                                        username: username
+                                        },{
+                                            $set:{
+                                                "achievements.twentyfive.achieved": "achieved"
+                                            }
+                                        }, function(err, docs) {
+                                            if(err) {
+                                                console.log('error updating documents',err);
+                                            } else {
+                                                console.log(docs,'last documents updated')
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        });
     }
 }
 
