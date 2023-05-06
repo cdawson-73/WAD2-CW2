@@ -64,22 +64,26 @@ exports.post_new_user = function(req, res) {
 }
 
 exports.show_account = function(req, res) {
+    var username = req.user.username
     res.render("user/logged-in/account", {
         "title": "Account",
         "user": req.user,
-        "name": req.user.username,
+        "name": username,
     });
 }
 
 exports.show_achievements = function(req, res) {
     var username = req.user.username;
-    var achievements = req.user.achievements;
-    console.log(achievements.length);
+    var achievements = Object.entries(req.user.achievements);
+    var achieveData = new Array();
+    for (var i = 0; i < achievements.length; i++) {
+        achieveData.push(achievements[i][1])
+    }
     res.render("user/logged-in/achievements", {
         "title": "Achievements",
         "user": req.user,
         "name": username,
-        "achievements": achievements,
+        "achievements": achieveData,
     });
 }
 
