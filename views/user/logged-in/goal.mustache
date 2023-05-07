@@ -6,52 +6,59 @@
     <h4>{{name}}</h4>
 </div>
 <div class="">
-    {{type}}
+    Goal Type: {{sType}}
+    <div class="goal">
+        <img src="/img/goals/{{type}}.png"  class="goal-images">
+    </div>
 </div>
 <div class="">
-    {{complete}}
+    Date Created: {{sDateCreated}}
 </div>
 <div class="">
-    {{dateCreated}}
+    Target Date: {{sDateSet}}
 </div>
 <div class="">
-    {{dateSet}}
+    Description: {{description}}
 </div>
-<div class="">
-    {{dateComplete}}
+<div class="button-multi">
+    <div class="form-group btn btn-primary">
+        <a href="/{{username}}/edit-goal/{{id}}" class="button-link">Edit Goal</a>
+    </div>
+    <div class="form-group btn btn-primary">
+        <a href="/{{username}}/complete-goal/{{id}}"class="button-link">Complete Goal</a>
+    </div>
+    <div class="form-group btn btn-primary">
+        <a href="/{{username}}/delete-goal/{{id}}" class="button-link">Delete Goal</a>
+    </div>
 </div>
-<div class="">
-    {{description}}
+<div class="form-group btn btn-primary">
+    <a href="/{{username}}/goals" class="button-link">Back To Goals</a>
 </div>
-<div class="">
-    {{id}}
-</div>
-<a href="">Edit Goal</a>
 {{/sGoal}}
 {{#cGoal}}
 <div class="">
     <h4>{{name}}</h4>
 </div>
 <div class="">
-    {{type}}
+    Type: {{cType}}
+    <div class="goal">
+        <img src="/img/goals/{{type}}.png" class="goal-images">
+    </div>
 </div>
 <div class="">
-    {{complete}}
+    Date Created: {{cDateCreated}}
 </div>
 <div class="">
-    {{dateCreated}}
+    Target Date: {{cDateSet}}
 </div>
 <div class="">
-    {{dateSet}}
+    Date Completed: {{cDateComplete}}
 </div>
 <div class="">
-    {{dateComplete}}
+    Description: {{description}}
 </div>
-<div class="">
-    {{description}}
-</div>
-<div class="">
-    {{id}}
+<div class="form-group btn btn-primary">
+    <a href="/{{username}}/goals" class="button-link">Back To Goals</a>
 </div>
 {{/cGoal}}
 {{>page-partials/footer}}

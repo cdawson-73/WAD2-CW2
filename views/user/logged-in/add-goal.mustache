@@ -25,7 +25,7 @@
                 Target Date
             </label>
             <div class="col-sm-10">
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" min="">
             </div>
             <label for="description">
                 Goal Description
@@ -36,6 +36,9 @@
         </div>
         <div class="form-group">
             <input type="submit" value="Add Goal" class="btn btn-primary">
+        </div>
+        <div class="form-group btn btn-primary">
+            <a href="/{{username}}/goals" class="button-link">Back To Goals</a>
         </div>
     </form>
 </div>

@@ -3,22 +3,24 @@
 <h2>Users Only</h2>
 {{#achievement}}
 <div class="">
-    {{name}}
-</div>
-<div class="">
-    {{image}}
-</div>
-<div class="">
-    {{type}}
-</div>
-<div class="">
-    {{achieved}}
-</div>
-<div class="">
-    {{dateAchieved}}
-</div>
-<div class="">
-    {{description}}
+        <div class="">
+        {{name}}
+    </div>
+    <div class="achievement-images">
+        <div class="{{achieved}}">
+            <img src="{{image}}">
+        </div>
+    </div>
+    <div class="">
+        Type: {{type}}
+    </div>
+    <div class="">
+        {{earned}}
+    </div>
+    <div class="">
+        Description: {{description}}
+    </div>
 </div>
 {{/achievement}}
+<a href="/{{username}}/achievements">Back To Achievements</a>
 {{>page-partials/footer}}

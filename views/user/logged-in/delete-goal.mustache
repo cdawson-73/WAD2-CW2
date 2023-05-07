@@ -1,0 +1,45 @@
+{{>page-partials/header}}
+<h1>Delete Goal</h1>
+<h2>Users Only</h2>
+<h3>Welcome {{username}}</h3>
+<div>
+    Are you sure you want to delete this goal?
+</div>
+{{#goal}}
+<div>
+    <div class="">
+        <h4>{{name}}</h4>
+    </div>
+    <div class="">
+        Type: {{type}}
+        <div class="goal">
+            <img src="/img/goals/{{type}}.png" class="goal-images">
+        </div>
+    </div>
+    <div class="">
+        Date Created: {{dateCreated}}
+    </div>
+    <div class="">
+        Target Date: {{dateSet}}
+    </div>
+    <div class="">
+        Description: {{description}}
+    </div>
+</div>
+{{/goal}}
+<div>
+    Once you delete this goal it cannot be recovered.
+</div>
+<div>
+    <div>
+        <form method="post" role="/delete-goal">
+            <div class="form-group">
+                <input type="submit" value="Delete Goal" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    <div class="form-group btn btn-primary">
+        <a href="/{{username}}/goal/{{id}}" class="button-link">Back To Goal</a>
+    </div>
+</div>
+{{>page-partials/footer}}

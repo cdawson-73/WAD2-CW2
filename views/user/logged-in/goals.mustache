@@ -7,32 +7,21 @@
     <div class="goals-set">
         <h4>Goals Set</h4>
         {{#sGoals}}
-            <a href="/{{username}}/goal/{{id}}">
-                <div class="">
-                    {{name}}
-                </div>
-                <div class="">
-                    {{type}}
-                </div>
-                <div class="">
-                    {{complete}}
-                </div>
-                <div class="">
-                    {{dateCreated}}
-                </div>
-                <div class="">
-                    {{dateSet}}
-                </div>
-                <div class="">
-                    {{dateComplete}}
-                </div>
-                <div class="">
-                    {{description}}
-                </div>
-                <div class="">
-                    {{id}}
-                </div>
-            </a>
+            <div class="goal-layout">
+                <a href="/{{username}}/goal/{{id}}">
+                    <div class="">
+                        <h4>{{name}}</h4>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <img src="/img/goals/{{type}}.png"  class="goal-images">
+                        </div>
+                    </div>
+                    <div class="">
+                        Date Created: {{dateCreated}}
+                    </div>
+                </a>
+            </div>
             <br>
         {{/sGoals}}
         {{^sGoals}}
@@ -44,32 +33,21 @@
     <div class="goals-complete">
         <h4>Goals Complete</h4>
         {{#cGoals}}
-            <a href="/{{username}}/goal/{{id}}">
-                <div class="">
-                    {{name}}
-                </div>
-                <div class="">
-                    {{type}}
-                </div>
-                <div class="">
-                    {{complete}}
-                </div>
-                <div class="">
-                    {{dateCreated}}
-                </div>
-                <div class="">
-                    {{dateSet}}
-                </div>
-                <div class="">
-                    {{dateComplete}}
-                </div>
-                <div class="">
-                    {{description}}
-                </div>
-                <div class="">
-                    {{id}}
-                </div>
-            </a>
+            <div class="goal-layout">
+                <a href="/{{username}}/goal/{{id}}">
+                    <div class="">
+                        <h4>{{name}}</h4>
+                    </div>
+                    <div class="">
+                        <div class="">
+                            <img src="/img/goals/{{type}}.png" class="goal-images">
+                        </div>
+                    </div>
+                    <div class="">
+                        Date Created: {{dateCreated}}
+                    </div>
+                </a>
+            </div>
             <br>
         {{/cGoals}}
         {{^cGoals}}
