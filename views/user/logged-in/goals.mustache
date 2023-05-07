@@ -1,43 +1,82 @@
 {{>page-partials/header}}
 <h1>Goals</h1>
 <h2>Users Only</h2>
-<h3>Welcome {{name}}</h3>
-<h3><a href="/add-goal">Add New Goal</a></h3>
-<div class="">
-    {{#goals}}
-        <div class="">
-            {{name}}
-        </div>
-        <div class="">
-            {{type}}
-        </div>
-        <div class="">
-            {{repeat}}
-        </div>
-        <div class="">
-            {{complete}}
-        </div>
-        <div class="">
-            {{dateCreated}}
-        </div>
-        <div class="">
-            {{dateSet}}
-        </div>
-        <div class="">
-            {{dateComplete}}
-        </div>
-        <div class="">
-            {{description}}
-        </div>
-        <div class="">
-            {{id}}
-        </div>
-        <br>
-    {{/goals}}
-    {{^goals}}
-        <div class="">
-            You have not set any goals.
-        </div>
-    {{/goals}}
+<h3>Welcome {{username}}</h3>
+<h3><a href="/{{username}}/add-goal">Add New Goal</a></h3>
+<div class="goals d-flex justify-content-around" >
+    <div class="goals-set">
+        <h4>Goals Set</h4>
+        {{#sGoals}}
+            <a href="/{{username}}/goal/{{id}}">
+                <div class="">
+                    {{name}}
+                </div>
+                <div class="">
+                    {{type}}
+                </div>
+                <div class="">
+                    {{complete}}
+                </div>
+                <div class="">
+                    {{dateCreated}}
+                </div>
+                <div class="">
+                    {{dateSet}}
+                </div>
+                <div class="">
+                    {{dateComplete}}
+                </div>
+                <div class="">
+                    {{description}}
+                </div>
+                <div class="">
+                    {{id}}
+                </div>
+            </a>
+            <br>
+        {{/sGoals}}
+        {{^sGoals}}
+            <div class="">
+                You have not set any goals.
+            </div>
+        {{/sGoals}}
+    </div>
+    <div class="goals-complete">
+        <h4>Goals Complete</h4>
+        {{#cGoals}}
+            <a href="/{{username}}/goal/{{id}}">
+                <div class="">
+                    {{name}}
+                </div>
+                <div class="">
+                    {{type}}
+                </div>
+                <div class="">
+                    {{complete}}
+                </div>
+                <div class="">
+                    {{dateCreated}}
+                </div>
+                <div class="">
+                    {{dateSet}}
+                </div>
+                <div class="">
+                    {{dateComplete}}
+                </div>
+                <div class="">
+                    {{description}}
+                </div>
+                <div class="">
+                    {{id}}
+                </div>
+            </a>
+            <br>
+        {{/cGoals}}
+        {{^cGoals}}
+            <div class="">
+                You have not completed any goals.
+            </div>
+        {{/cGoals}}
+    </div>
 </div>
 {{>page-partials/footer}}

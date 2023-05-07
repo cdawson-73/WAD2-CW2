@@ -1,17 +1,19 @@
 {{>page-partials/header}}
 <h1>Achievements</h1>
 <h2>Users Only</h2>
-<h3>Welcome {{name}}</h3>
+<h3>Welcome {{username}}</h3>
 <div class="achievement-images">
 {{#achievements}}
-    <div class="{{achieved}}">
-        <img src="{{image}}">
-        <div class="overlay">
-            <div class="image-overlay-text">
-                {{name}}
+    <a href="/{{username}}/achievement/{{name}}">
+        <div class="{{achieved}}">
+            <img src="{{image}}">
+            <div class="overlay">
+                <div class="image-overlay-text">
+                    {{name}}
+                </div>
             </div>
         </div>
-    </div>
+    </a>
 {{/achievements}}
 </div>
 {{>page-partials/footer}}
