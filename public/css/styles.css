@@ -89,3 +89,20 @@ h1, h2, h3 {
     transform: translate(-50%, -50%);
     text-align: center;
   }
+
+  /* Goals Styling */
+
+  .goals {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .goals-complete {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .goals-set {
+    display: flex;
+    flex-direction: column;
+  }
