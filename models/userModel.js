@@ -71,8 +71,8 @@ class UserDao {
         return new Promise((resolve, reject) => {
         db.update({
             username: username
-            },
-                {$inc: {
+            },{
+                $inc: {
                     [typeIncrement]: 1,
                     generalSet: 1,
                 },
@@ -97,10 +97,35 @@ class UserDao {
                     console.log("Goal added.")
                 }
             });
-            this.updateStatus(username);
+            this.updateAchievement(username);
     })}
 
-    updateStatus(username) {
+    completeGoal(username, id) {
+        var typeIncrement = type.concat("Complete");
+        var db = this.uDb;
+        var goal = "goals." + id;
+        return new Promise((resolve, reject) =>{
+            db.update({
+                username: username
+            },{
+                $inc: {
+                    [typeIncrement]: 1,
+                    generalComplete: 1,
+                },
+                $set: {
+                    [goal]: {
+
+                    }
+                }
+            })
+        });
+    }
+
+    deleteGoal(username) {
+
+    }
+
+    updateAchievement(username) {
         var db = this.uDb;
         return new Promise((resolve, reject) => {
             db.find({
