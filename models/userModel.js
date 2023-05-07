@@ -39,6 +39,7 @@ class UserDao {
                 nutritionSet: 0,
                 nutritionComplete: 0,
                 achievements: achievements,
+                goals: {}
             };
             that.insert(entry, function(err) {
                 if (err) {
@@ -63,31 +64,31 @@ class UserDao {
         });
     }
 
-    addGoal(username, name, type, repeat, complete, dateCreated, dateSet, dateComplete, description, id) {
+    addGoal(username, name, type, complete, dateCreated, dateSet, dateComplete, description, id) {
         var typeIncrement = type.concat("Set");
         var db = this.uDb;
+        var goals = "goals." + id;
         return new Promise((resolve, reject) => {
         db.update({
             username: username
-            },{
-                $inc: {
+            },
+                {$inc: {
                     [typeIncrement]: 1,
                     generalSet: 1,
                 },
-                $push:{
-                    goals: {
+                $set:{
+                    [goals]: {
+                        
                         name: name,
                         type: type,
-                        repeat: repeat,
                         complete: complete,
                         dateCreated: dateCreated,
                         dateSet: dateSet,
                         dateComplete: dateComplete,
                         description: description,
                         id: id,
-                    }
                 }
-            },
+            }},
             function(err, goal){
                 if(err){
                     reject(err);
@@ -124,13 +125,14 @@ class UserDao {
                         if (goalTotals[i] == 1) {
                             var achieved = numWords(j+1);
                             achieved = achieved.replace(/\s+/g, '');
-                            achieved = "achievements." + achieved + ".achieved"
-
+                            var dateComp = "achievements." + achieved + ".dateAchieved";
+                            achieved = "achievements." + achieved + ".achieved";
                     db.update({
                         username: username
                         },{
                             $set:{
-                                [achieved]: "achieved"
+                                [achieved]: "achieved",
+                                [dateComp]: Math.round((Date.now() / 1000)) * 1000,
                             }
                         }, function(err, docs) {
                             if(err) {
