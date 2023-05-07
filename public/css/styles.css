@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Tenor+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
+/* Mobile First Styling:- Small Phones */
+
 * {
     /*border: 1px solid red;*/
     font-family: "Arsenal", serif;
+    color: darkgreen;
 }
 
 h1, h2, h3 {
@@ -69,16 +72,26 @@ h1, h2, h3 {
     opacity: 0;
     transition: .5s ease;
     background-color: #008CBA;
-  }
+    border-radius: 25px;
+}
   
-  .achieved:hover .overlay {
+.achieved:hover .overlay {
     opacity: 1;
-  }
-  .unachieved:hover .overlay {
-    opacity: 1;
-  }
+}
 
-  .image-overlay-text {
+.achieved:active .overlay {
+    opacity: 1;
+}
+
+.unachieved:hover .overlay {
+    opacity: 1;
+}
+
+.unachieved:active .overlay {
+    opacity: 1;
+}
+
+.image-overlay-text {
     color: white;
     font-size: 10px;
     position: absolute;
@@ -88,21 +101,87 @@ h1, h2, h3 {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-  }
+}
 
-  /* Goals Styling */
+/* Goals Styling */
 
-  .goals {
+.goals {
     display: flex;
     flex-direction: row;
-  }
+}
 
-  .goals-complete {
+.goals-complete {
     display: flex;
     flex-direction: column;
-  }
+    width: 160px;
+}
 
-  .goals-set {
+.goals-set {
     display: flex;
     flex-direction: column;
+    width: 160px;
+}
+
+.goal-images {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+}
+
+.goal-layout {
+    display: flex;
+    flex-direction: column;
+    width: 110px;
+    align-self: center;
+}
+
+.goal {
+    width: 100px;
+}
+
+/* Link Styling */
+
+.button-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.button-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+.button-multi {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+
+@media screen and (min-width: 390px) {
+
+  /* Larger Phones */
+
+  * {
+    color: blue;
   }
+}
+
+@media screen and (min-width: 768px) {
+
+  /* Small Tablets */
+
+  * {
+    color: crimson;
+  }
+}
+
+@media screen and (min-width: 1040px) {
+  /* Larger Devices & Computers */
+    
+  * {
+    color: black;
+  }
+}
