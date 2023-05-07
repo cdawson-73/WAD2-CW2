@@ -131,6 +131,7 @@ dist
 
 # File I created to save some info for adding later.
 save.txt
+template.mustache
 
 # Database files always changing, no need to be on GitHub. 
 users.db
