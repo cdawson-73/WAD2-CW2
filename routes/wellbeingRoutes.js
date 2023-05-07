@@ -10,19 +10,21 @@ router.get("/about", controller.show_about);
 router.get("/useful-links", controller.show_usefull);
 
 // Login page.
-router.get("/login", loginCheck.ensureLoggedOut("/account"), controller.show_login);
+router.get("/login", loginCheck.ensureLoggedOut("/:username/account"), controller.show_login);
 router.post("/login", auth.authorize("/login"), controller.post_login);
 
 // Sign up page.
-router.get("/signup", loginCheck.ensureLoggedOut("/account"), controller.show_signup);
+router.get("/signup", loginCheck.ensureLoggedOut("/:username/account"), controller.show_signup);
 router.post("/signup", controller.post_new_user);
 
 // User only pages.
-router.get("/account", loginCheck.ensureLoggedIn("/login"), controller.show_account);
-router.get("/achievements", loginCheck.ensureLoggedIn("/login"), controller.show_achievements);
-router.get("/add-goal", loginCheck.ensureLoggedIn("/login"), controller.show_new_goal);
-router.post("/add-goal", controller.post_new_goal);
-router.get("/goals", loginCheck.ensureLoggedIn("/login"), controller.show_goals)
+router.get("/:username/account", loginCheck.ensureLoggedIn("/login"), controller.show_account);
+router.get("/:username/achievements", loginCheck.ensureLoggedIn("/login"), controller.show_achievements);
+router.get("/:username/achievement/:name", loginCheck.ensureLoggedIn("/login"), controller.show_achievement);
+router.get("/:username/add-goal", loginCheck.ensureLoggedIn("/login"), controller.show_new_goal);
+router.post("/:username/add-goal", controller.post_new_goal);
+router.get("/:username/goals", loginCheck.ensureLoggedIn("/login"), controller.show_goals);
+router.get("/:username/goal/:id", loginCheck.ensureLoggedIn("/login"), controller.show_goal);
 
 // Log out page.
 router.get("/logout", controller.logout);
