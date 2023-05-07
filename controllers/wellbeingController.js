@@ -99,16 +99,24 @@ exports.show_achievement = function(req, res) {
     var name  = req.params.name;
     var achievements = Object.entries(req.user.achievements);
     var achievement;
+    var earned;
     for (var i = 0; i < achievements.length; i++) {
         if (achievements[i][1].name == name) {
             achievement = achievements[i][1];
         }
     }
+    if (achievement.dateAchieved == "null") {
+        earned;
+    } else {
+        earned = "Earned: " + new Intl.DateTimeFormat("en-GB").format(achievement.dateAchieved)
+    }
+
     res.render("user/logged-in/achievement", {
         "title": username,
         "user": req.user,
         "username": username,
         "achievement": achievement,
+        "earned": earned,
     });
 }
 
@@ -122,18 +130,16 @@ exports.show_new_goal = function(req, res) {
 }
 
 exports.post_new_goal = function(req, res) {
+    var username = req.user.username;
+    var name = req.body.name;
+    var type = req.body.type;
+    var complete = "false";
+    var dateCreated = Math.round((Date.now() / 1000)) * 1000;
     var dateSet = req.body.date;
     dateSet =  Date.parse(dateSet);
-    console.log(dateSet);
-    const username = req.user.username;
-    const name = req.body.name;
-    const type = req.body.type;
-    const complete = "false";
-    const dateCreated = Math.round((Date.now() / 1000)) * 1000;
-    //const dateSet = req.body.date;
-    const dateComplete = "null";
-    const description = req.body.description;
-    const id = Date.now().toString(36) + Math.random().toString(36).slice(2);
+    var dateComplete = "null";
+    var description = req.body.description;
+    var id = Date.now().toString(36) + Math.random().toString(36).slice(2);
 
     if (!name || !type || !dateSet || !description) {
         res.sendStatus(401);
@@ -149,17 +155,20 @@ exports.show_goals = function(req, res) {
     var goals = Object.entries(req.user.goals);
     var setGoalData = new Array();
     var completeGoalData = new Array();
+    var dateFormat;
     for (var i = 0; i < goals.length; i++) {
-        console.log(goals[i][1].complete);
         if (goals[i][1].complete == "true") {
+            dateFormat = goals[i][1].dateCreated;
+            dateFormat = new Intl.DateTimeFormat("en-GB").format(dateFormat);
+            goals[i][1].dateCreated = dateFormat;
             completeGoalData.push(goals[i][1]);
         } else {
+            dateFormat = goals[i][1].dateCreated;
+            dateFormat = new Intl.DateTimeFormat("en-GB").format(dateFormat);
+            goals[i][1].dateCreated = dateFormat;
             setGoalData.push(goals[i][1]);
         }
     }
-    //console.log(setGoalData);
-    //console.log(setGoalData[0].id);
-    //console.log(completeGoalData);
     res.render("user/logged-in/goals", {
         "title": "Goals",
         "user": req.user,
@@ -171,31 +180,200 @@ exports.show_goals = function(req, res) {
 
 exports.show_goal = function(req, res) {
     var username = req.user.username;
-    var id  = req.params.id;
+    var id = req.params.id;
     var goal = Object.entries(req.user.goals);
     var goalData;
     var sGoal;
+    var sType;
+    var sDateCreated;
+    var sTargetDate;
     var cGoal;
+    var cType;
+    var cDateCreated;
+    var cTargetDate;
+    var cDateComplete;
+
     for (var i = 0; i < goal.length; i++) {
-        console.log(goal[i][1].id);
         if (goal[i][1].id == id) {
             goalData = goal[i][1];
+            console.log(goalData);
             if (goalData.complete == "true") {
                 cGoal = goalData;
+                cDateComplete = new Intl.DateTimeFormat("en-GB").format(cGoal.dateComplete);
+                if (goalData.type == "fitness") {
+                    cType = "Fitness";
+                } else if (goalData.type == "health") {
+                    cType = "Healthy-Living";
+                } else {
+                    cType = "Nutrition";
+                }
+                
+                cDateCreated = new Intl.DateTimeFormat("en-GB").format(cGoal.dateCreated);
+                cTargetDate = new Intl.DateTimeFormat("en-GB").format(cGoal.dateSet);
             } else {
                 sGoal = goalData;
+                if (goalData.type == "fitness") {
+                    sType = "Fitness";
+                } else if (goalData.type == "health") {
+                    sType = "Healthy-Living";
+                } else {
+                    sType = "Nutrition";
+                }
+                
+                sDateCreated = new Intl.DateTimeFormat("en-GB").format(sGoal.dateCreated);
+                sTargetDate = new Intl.DateTimeFormat("en-GB").format(sGoal.dateSet);
             }
-            console.log(goalData);
+
+            
         }
     }
+
     res.render("user/logged-in/goal", {
         "title": "Aye",
         "user": req.user,
         "username": username,
         "goal": goalData,
         "sGoal": sGoal,
+        "sType": sType,
+        "sDateCreated": sDateCreated,
+        "sDateSet": sTargetDate,
         "cGoal": cGoal,
+        "cType": cType,
+        "cDateCreated": cDateCreated,
+        "cDateSet": cTargetDate,
+        "cDateComplete": cDateComplete,
     });
+}
+
+exports.show_edit_goal = function(req, res) {
+    var username = req.user.username;
+    var id = req.params.id;
+    var goal = Object.entries(req.user.goals);
+    var goalData;
+    var fitness;
+    var health;
+    var nutrition;
+    for (var i = 0; i < goal.length; i++) {
+        if (goal[i][1].id == id) {
+            goalData = goal[i][1];
+            console.log(goalData.type);
+            if (goalData.type == "fitness") {
+                fitness = goalData.type
+            } else if (goalData.type == "health") {
+                health = goalData.type
+            } else {
+                nutrition = goalData.type
+            }
+        }
+    }
+    res.render("user/logged-in/edit-goal", {
+        "title": "Edit Goal",
+        "user": req.user,
+        "username": username,
+        "name": goalData.name,
+        "fitness": fitness,
+        "health": health,
+        "nutrition": nutrition,
+        "date": new Intl.DateTimeFormat("fr-CA", {year: "numeric", month: "2-digit", day: "2-digit"}).format(goalData.dateSet),
+        "description": goalData.description,
+        "id": id,
+    });
+}
+
+exports.post_edit_goal = function(req, res) {
+    var username = req.user.username;
+    var id = req.params.id;
+    var name = req.body.name;
+    var type = req.body.type;
+    var dateSet = req.body.date;
+    dateSet =  Date.parse(dateSet);
+    var description = req.body.description;
+
+    if (!name || !type || !dateSet || !description) {
+        res.sendStatus(401);
+        console.log("All fields not complete.")
+        return;
+    }
+
+    // Update function link here.
+
+    res.redirect("/" + username + "/goal/" + id);
+}
+
+exports.show_complete_goal = function(req, res, next) {
+    var username = req.user.username;
+    var id = req.params.id;
+    var goal = Object.entries(req.user.goals);
+    var goalData;
+    var createDateFormat;
+    var setDateFormat;
+
+    for (var i = 0; i < goal.length; i++) {
+        if (goal[i][1].id == id) {
+            goalData = goal[i][1];
+            createDateFormat = goalData.dateCreated;
+            setDateFormat = goalData.dateSet;
+            createDateFormat = new Intl.DateTimeFormat("en-GB").format(createDateFormat);
+            setDateFormat = new Intl.DateTimeFormat("en-GB").format(setDateFormat);
+            goalData.dateCreated = createDateFormat;
+            goalData.dateSet = setDateFormat;
+        }
+    }
+    console.log(goalData);
+    res.render("user/logged-in/complete-goal", {
+        "title": "Complete Goal",
+        "user": req.user,
+        "username": username,
+        "goal": goalData,
+        "id": id,
+    });
+}
+
+exports.post_complete_goal = function(req, res, next) {
+    var username = req.user.username;
+    var id = req.params.id;
+
+    // Complete function link here.
+
+    res.redirect("/" + username + "/goal/" + id);
+}
+
+exports.show_delete_goal = function(req, res, next) {
+    var username = req.user.username;
+    var id = req.params.id;
+    var goal = Object.entries(req.user.goals);
+    var goalData;
+    var createDateFormat;
+    var setDateFormat;
+
+    for (var i = 0; i < goal.length; i++) {
+        if (goal[i][1].id == id) {
+            goalData = goal[i][1];
+            createDateFormat = goalData.dateCreated;
+            setDateFormat = goalData.dateSet;
+            createDateFormat = new Intl.DateTimeFormat("en-GB").format(createDateFormat);
+            setDateFormat = new Intl.DateTimeFormat("en-GB").format(setDateFormat);
+            goalData.dateCreated = createDateFormat;
+            goalData.dateSet = setDateFormat;
+        }
+    }
+    console.log(goalData);
+    res.render("user/logged-in/delete-goal", {
+        "title": "Complete Goal",
+        "user": req.user,
+        "username": username,
+        "goal": goalData,
+        "id": id,
+    });
+}
+
+exports.post_delete_goal = function(req, res, next) {
+    var username = req.user.username;
+    var id = req.params.id;
+
+    // Delete function link here.
+    
+    res.redirect("/" + username + "/goals");
 }
 
 exports.logout = function(req, res, next) {
