@@ -19,8 +19,25 @@ router.post("/signup", controller.post_new_user);
 
 // User only pages.
 
-// Account
+// Dashboard & Account
+router.get("/:username/dashboard", loginCheck.ensureLoggedIn("/login"), controller.show_dashboard);
 router.get("/:username/account", loginCheck.ensureLoggedIn("/login"), controller.show_account);
+
+router.get("/:username/update-account", loginCheck.ensureLoggedIn("/login"), controller.show_account_edit);
+router.post("/:username/update-account", loginCheck.ensureLoggedIn("/login"), controller.post_account_edit);
+
+//router.get("/:username/confirm-edit-account", loginCheck.ensureLoggedIn("/login"), controller.show_account_edit_confirm);
+//router.post("/:username/confirm-edit-account", loginCheck.ensureLoggedIn("/login"), controller.post_account_edit_confirm);
+
+router.get("/:username/update-password", loginCheck.ensureLoggedIn("/login"), controller.show_password_edit);
+router.post("/:username/update-password", loginCheck.ensureLoggedIn("/login"), controller.post_password_edit);
+
+//router.get("/:username/confirm-edit-password", loginCheck.ensureLoggedIn("/login"), controller.show_password_edit_confirm);
+//router.post("/:username/confirm-edit-password", loginCheck.ensureLoggedIn("/login"), controller.post_password_edit_confirm);
+
+router.get("/:username/delete-account", loginCheck.ensureLoggedIn("/login"), controller.show_account_delete);
+router.post("/:username/delete-account", loginCheck.ensureLoggedIn("/login"), controller.post_account_delete);
+
 
 // Achievements
 router.get("/:username/achievements", loginCheck.ensureLoggedIn("/login"), controller.show_achievements);
