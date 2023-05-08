@@ -3,7 +3,8 @@ const nedb = require("nedb");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 const { achieve } = require("./achievementModel.js");
-const numWords = require("num-words")
+const numWords = require("num-words");
+const crypto = require("crypto");
 
 
 class UserDao {
@@ -123,15 +124,49 @@ class UserDao {
                             reject(err);
                         } else {
                             resolve(goal);
-                            console.log("Password edited.")
+                            console.log("Password updated.")
                         }
                     });
             });
         });
     }
 
-    passwordReset(email) {
+    passwordResetHash(password) {
+        const resetHash = crypto.createHash("sha512").update(password).digest("hex");
+        return resetHash;
+    }
+
+    verifyPasswordResetHash(password, resetHash) {
+        return this.passwordResetHash(password) === resetHash;
+    }
+
+    getDetails(email) {
+        var db = this.uDb;
+        var info;
+        return new Promise((resolve, reject) => {
+            db.find({
+                email: email,
+            },{
+                username: 1,
+                password: 1,
+                _id: 0,
+            }, function(err, details) {
+                if (err) {
+                    console.log("Details not found.")
+                    reject(err);
+                } else {
+                    resolve(details);
+                    info = details;
+                    return info;
+                }
+            });
+            return info;
+            })
+    }
+
+    useDetails(email) {
         
+        return details
     }
 
     delete(username) {
@@ -139,13 +174,13 @@ class UserDao {
         return new Promise((resolve, reject) =>{
             db.remove({
                 username: username,
-            },function(err, goal) {
+            },function(err, user) {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(goal);
+                    resolve(user);
                     console.log("User deleted.");
-                    console.log(goal);
+                    console.log(user);
                 }
             });
         });
