@@ -1,9 +1,10 @@
 {{>page-partials/header}}
 <h1>Achievement</h1>
 <h2>Users Only</h2>
+<h3>Welcome {{firstName}}</h3>
 {{#achievement}}
 <div class="">
-        <div class="">
+    <div class="">
         {{name}}
     </div>
     <div class="achievement-images">
@@ -22,5 +23,7 @@
     </div>
 </div>
 {{/achievement}}
-<a href="/{{username}}/achievements">Back To Achievements</a>
+<div class="form-group btn btn-primary">
+    <a href="/{{username}}/achievements" class="button-link">Back To Achievements</a>
+</div>
 {{>page-partials/footer}}
