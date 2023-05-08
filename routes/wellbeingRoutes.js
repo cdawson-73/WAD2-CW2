@@ -15,12 +15,15 @@ router.post("/login", auth.authorize("/login"), controller.post_login);
 
 // Sign up page.
 router.get("/signup", loginCheck.ensureLoggedOut("/:username/account"), controller.show_signup);
-router.post("/signup", controller.post_new_user);
+router.post("/signup", loginCheck.ensureLoggedOut("/:username/account"), controller.post_new_user);
 
 // Forgot password page.
 
 router.get("/reset-password", loginCheck.ensureLoggedOut("/:username/account"), controller.show_forgot_password);
-router.post("/reset-password", controller.post_forgot_password);
+router.post("/reset-password", loginCheck.ensureLoggedOut("/:username/account"), controller.post_forgot_password);
+
+router.get("/new-password", loginCheck.ensureLoggedOut("/:username/account"), controller.show_new_password);
+router.post("/new-password", loginCheck.ensureLoggedOut("/:username/account"), controller.post_new_password);
 
 // User only pages.
 
