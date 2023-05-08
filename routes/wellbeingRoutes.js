@@ -17,49 +17,47 @@ router.post("/login", auth.authorize("/login"), controller.post_login);
 router.get("/signup", loginCheck.ensureLoggedOut("/:username/account"), controller.show_signup);
 router.post("/signup", controller.post_new_user);
 
+// Forgot password page.
+
+router.get("/reset-password", loginCheck.ensureLoggedOut("/:username/account"), controller.show_forgot_password);
+router.post("/reset-password", controller.post_forgot_password);
+
 // User only pages.
 
-// Dashboard & Account
+// Dashboard & Account.
 router.get("/:username/dashboard", loginCheck.ensureLoggedIn("/login"), controller.show_dashboard);
 router.get("/:username/account", loginCheck.ensureLoggedIn("/login"), controller.show_account);
 
 router.get("/:username/update-account", loginCheck.ensureLoggedIn("/login"), controller.show_account_edit);
 router.post("/:username/update-account", loginCheck.ensureLoggedIn("/login"), controller.post_account_edit);
 
-//router.get("/:username/confirm-edit-account", loginCheck.ensureLoggedIn("/login"), controller.show_account_edit_confirm);
-//router.post("/:username/confirm-edit-account", loginCheck.ensureLoggedIn("/login"), controller.post_account_edit_confirm);
-
 router.get("/:username/update-password", loginCheck.ensureLoggedIn("/login"), controller.show_password_edit);
 router.post("/:username/update-password", loginCheck.ensureLoggedIn("/login"), controller.post_password_edit);
-
-//router.get("/:username/confirm-edit-password", loginCheck.ensureLoggedIn("/login"), controller.show_password_edit_confirm);
-//router.post("/:username/confirm-edit-password", loginCheck.ensureLoggedIn("/login"), controller.post_password_edit_confirm);
 
 router.get("/:username/delete-account", loginCheck.ensureLoggedIn("/login"), controller.show_account_delete);
 router.post("/:username/delete-account", loginCheck.ensureLoggedIn("/login"), controller.post_account_delete);
 
-
-// Achievements
+// Achievements.
 router.get("/:username/achievements", loginCheck.ensureLoggedIn("/login"), controller.show_achievements);
 router.get("/:username/achievement/:name", loginCheck.ensureLoggedIn("/login"), controller.show_achievement);
 
-// Add Goal
+// Add Goal.
 router.get("/:username/add-goal", loginCheck.ensureLoggedIn("/login"), controller.show_new_goal);
 router.post("/:username/add-goal", loginCheck.ensureLoggedIn("/login"), controller.post_new_goal);
 
-// Show Goals
+// Show Goals.
 router.get("/:username/goals", loginCheck.ensureLoggedIn("/login"), controller.show_goals);
 router.get("/:username/goal/:id", loginCheck.ensureLoggedIn("/login"), controller.show_goal);
 
-// Edit Goals
+// Edit Goals.
 router.get("/:username/edit-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.show_edit_goal);
 router.post("/:username/edit-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.post_edit_goal);
 
-// Complete Goal
+// Complete Goal.
 router.get("/:username/complete-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.show_complete_goal);
 router.post("/:username/complete-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.post_complete_goal);
 
-// Delete Goal
+// Delete Goal.
 router.get("/:username/delete-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.show_delete_goal);
 router.post("/:username/delete-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.post_delete_goal);
 
