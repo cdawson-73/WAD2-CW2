@@ -130,6 +130,10 @@ class UserDao {
         });
     }
 
+    passwordReset(email) {
+        
+    }
+
     delete(username) {
         var db = this.uDb;
         return new Promise((resolve, reject) =>{
