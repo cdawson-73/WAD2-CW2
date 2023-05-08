@@ -110,16 +110,10 @@ h1, h2, h3 {
     flex-direction: row;
 }
 
-.goals-complete {
+.goals-types {
     display: flex;
     flex-direction: column;
-    width: 160px;
-}
-
-.goals-set {
-    display: flex;
-    flex-direction: column;
-    width: 160px;
+    width: 300px
 }
 
 .goal-images {
@@ -141,6 +135,27 @@ h1, h2, h3 {
     width: 100px;
 }
 
+.goal-totals{
+    display: flex;
+    flex-direction: row;
+}
+
+.totals-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.total {
+    display: flex;
+    justify-content: center;
+}
+
+.each {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 /* Link Styling */
 
 .button-link {
@@ -158,7 +173,6 @@ h1, h2, h3 {
   flex-direction: row;
   gap: 10px;
 }
-
 
 @media screen and (min-width: 390px) {
 
