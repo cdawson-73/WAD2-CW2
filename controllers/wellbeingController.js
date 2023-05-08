@@ -1,8 +1,7 @@
 const user = require("../models/userModel.js");
 const auth = require("../auth/auth.js");
 const bcrypt = require("bcrypt");
-
-const { sendEmail } = require("../utils/sendEmail.js")
+const { sendEmail } = require("../utils/sendEmail.js");
 
 exports.show_homepage = function(req, res) {
     
@@ -59,20 +58,67 @@ exports.show_forgot_password = function(req, res) {
 }
 
 exports.post_forgot_password = function(req, res) {
-    console.log("Is it even getting here?")
     var email = req.body.email;
-    
-    // Delete When Working
+    var subject = "Password Reset Request";
 
-    var subject = req.body.subject;
-    var text = req.body.text;
+    user.lookupEmail(email, function(err, u) {
+        if (!u) {
+            console.log("This email is not registered.");
+            return;
+        }
 
-    console.log("Passing", email, subject, text);
+        user.getDetails(email).then((data) => {
+            var username = data[0].username;
+            var password = data[0].password;
+            var link;
+            var content;
+            var resetHash = user.passwordResetHash(password);
+            link = "http://localhost:3000/new-password?email=" + email + "&key=" + resetHash;
+            content = username + " you requested to reset your password. <a href='" + link + "'>Click this link to reset your password.</a>";
+            sendEmail(email, subject, content);
+            res.redirect('/login');
+        });
+    }); 
+}
 
-    sendEmail(email, subject, text);
-    //user.passwordReset();
+exports.show_new_password = function(req, res) {
+    var email = req.query.email;
+    var hash = req.query.key;
 
-    res.redirect('/login');
+    user.getDetails(email).then((data) => {
+        user.lookupEmail(email, function(err, u) {
+            if (!u) {
+                console.log("Invalid email.");
+                return;
+            } else if (!user.verifyPasswordResetHash(data[0].password, hash)) {
+                console.log("Invalid key.");
+                return;
+            }
+            res.render("user/reset-password", {
+                "title": "Reset Password"
+            });
+        });
+    });
+}
+
+exports.post_new_password = function(req, res) {
+    var email = req.query.email;
+    var newPassword = req.body.newPassword;
+    var conPassword = req.body.conPassword;
+
+    if (!newPassword || !conPassword) {
+        console.log("You need to fill out all of the fields.")
+        return;
+    } else if (newPassword != conPassword) {
+        console.log("Passwords don't match.")
+        return;
+    } else{
+        user.getDetails(email).then((data) => {
+            var username = data[0].username;
+            user.updatePassword(username, newPassword);
+            res.redirect("/login"); 
+        });
+    }
 }
 
 exports.post_new_user = function(req, res) {
@@ -84,27 +130,24 @@ exports.post_new_user = function(req, res) {
     const conPassword = req.body.confirmPassword;
     
     if (!username || !password || !email || !firstName || !lastName) {
-        res.sendStatus(401);
         console.log("You need to fill out all of the fields.")
         return;
-    }
-
-    if (password != conPassword) {
-        res.sendStatus(401);
-        console.log("Passwords don't mnatch.")
+    } else if (password != conPassword) {
+        console.log("Passwords don't match.")
+        return;
+    } else if (email == process.env.USER) {
+        console.log("This email is unavailable.")
         return;
     }
 
     user.lookupUser(username, function(err, u) {
         if (u) {
-            res.sendStatus(401);
             console.log(username, "exists.")
             return;
         }
 
         user.lookupEmail(email, function(err, u) {
             if (u) {
-                res.sendStatus(401);
                 console.log(email, "exists.")
                 return;
             }
@@ -159,22 +202,21 @@ exports.post_account_edit = function(req, res) {
     var password = req.body.password;
 
     if (!username || !email || !firstName || !lastName) {
-        res.sendStatus(401);
         console.log("You need to fill out all of the fields.")
         return;
     } else if (!password) {
-        res.sendStatus(401);
         console.log("You need to enter your password to update your account.")
         return;
+    } else if (email == process.env.USER) {
+        console.log("This email is unavailable.")
+        return;
     } else if (!bcrypt.compareSync(password, req.user.password)) {
-        res.sendStatus(401);
         console.log("Password incorrect.")
         return;
     } else {
         if (email != req.user.email) {
             user.lookupEmail(email, function(err, u) {
                 if (u) {
-                    res.sendStatus(401);
                     console.log(email, "exists.")
                     return;
                 }
@@ -207,15 +249,12 @@ exports.post_password_edit = function(req, res) {
     var conPassword = req.body.conPassword;
 
     if (!currentPassword || !newPassword || !conPassword) {
-        res.sendStatus(401);
         console.log("You need to fill out all of the fields.")
         return;
     } else if (!bcrypt.compareSync(currentPassword, req.user.password)) {
-        res.sendStatus(401);
         console.log("Current password incorrect.")
         return;
     } else if (newPassword != conPassword) {
-        res.sendStatus(401);
         console.log("Passwords don't match.")
         return;
     } else {
@@ -240,11 +279,9 @@ exports.post_account_delete = function(req, res) {
     var password = req.body.password;
 
     if (!password) {
-        res.sendStatus(401);
         console.log("You need to enter your password to delete your account.")
         return;
     } else if (!bcrypt.compareSync(password, req.user.password)) {
-        res.sendStatus(401);
         console.log("Password incorrect.")
         return;
     } else {
@@ -324,7 +361,6 @@ exports.post_new_goal = function(req, res) {
     var id = Date.now().toString(36) + Math.random().toString(36).slice(2);
 
     if (!name || !type || !dateSet || !description) {
-        res.sendStatus(401);
         console.log("All fields not complete.")
         return;
     }
@@ -494,7 +530,6 @@ exports.post_edit_goal = function(req, res) {
     }
 
     if (!name || !type || !dateSet || !description) {
-        res.sendStatus(401);
         console.log("All fields not complete.")
         return;
     }
