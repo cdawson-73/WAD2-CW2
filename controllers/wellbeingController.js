@@ -1,5 +1,6 @@
 const user = require("../models/userModel.js");
 const auth = require("../auth/auth.js");
+const bcrypt = require("bcrypt");
 
 exports.show_homepage = function(req, res) {
     
@@ -40,7 +41,7 @@ exports.post_login = function(req, res) {
     var username = req.user.username;
     console.log(username, "signed in.");
     
-    res.redirect("/"+ username +"/account");
+    res.redirect("/"+ username +"/dashboard");
    };
 
 exports.show_signup = function(req, res) {
@@ -52,35 +53,186 @@ exports.show_signup = function(req, res) {
 exports.post_new_user = function(req, res) {
     const username = req.body.username;
     const password = req.body.password;
+    const email = req.body.email;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const conPassword = req.body.confirmPassword;
     
-    if (!username || !password) {
+    if (!username || !password || !email || !firstName || !lastName) {
         res.sendStatus(401);
-        console.log("No username or password entered")
+        console.log("You need to fill out all of the fields.")
         return;
     }
-    user.lookup(username, function(err, u) {
-    if (u) {
+
+    if (password != conPassword) {
         res.sendStatus(401);
-        console.log(username, "exists.")
+        console.log("Passwords don't mnatch.")
         return;
     }
-    user.create(username, password);
-    console.log("Register", username, "with password", password);
-    res.redirect('/login');
+
+    user.lookupUser(username, function(err, u) {
+        if (u) {
+            res.sendStatus(401);
+            console.log(username, "exists.")
+            return;
+        }
+
+        user.lookupEmail(email, function(err, u) {
+            if (u) {
+                res.sendStatus(401);
+                console.log(email, "exists.")
+                return;
+            }
+            
+            user.create(username, password, email, firstName, lastName);
+            console.log("Register", username, "with password", password);
+            res.redirect('/login');
+        });
    });
 }
 
+exports.show_dashboard = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    res.render("user/logged-in/dashboard", {
+        "title": "Dashboard",
+        "user": req.user,
+        "username": username,
+        "firstName": firstName,
+    });
+}
+
 exports.show_account = function(req, res) {
-    var username = req.user.username
+    var firstName = req.user.firstName;
+    
     res.render("user/logged-in/account", {
         "title": "Account",
         "user": req.user,
-        "username": username,
+        "firstName": firstName,
     });
+    
+    
+}
+
+exports.show_account_edit = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    
+    
+    res.render("user/logged-in/edit-account", {
+        "title": "Account",
+        "user": req.user,
+        "firstName": firstName,
+    });
+}
+
+exports.post_account_edit = function(req, res) {
+    var username = req.user.username;
+    var email = req.body.email;
+    var firstName = req.body.firstName;
+    var lastName = req.body.lastName;
+    var password = req.body.password;
+
+    if (!username || !email || !firstName || !lastName) {
+        res.sendStatus(401);
+        console.log("You need to fill out all of the fields.")
+        return;
+    } else if (!password) {
+        res.sendStatus(401);
+        console.log("You need to enter your password to update your account.")
+        return;
+    } else if (!bcrypt.compareSync(password, req.user.password)) {
+        res.sendStatus(401);
+        console.log("Password incorrect.")
+        return;
+    } else {
+        if (email != req.user.email) {
+            user.lookupEmail(email, function(err, u) {
+                if (u) {
+                    res.sendStatus(401);
+                    console.log(email, "exists.")
+                    return;
+                }
+                    user.update(username, email, firstName, lastName);
+                    console.log("Update", username, "details");
+                    res.redirect("/" + username + "/account");
+           });
+        } else {
+            user.update(username, email, firstName, lastName);
+            console.log("Update", username, "details");
+            res.redirect("/" + username + "/account");
+        }
+    }
+}
+
+exports.show_password_edit = function(req, res) {
+    var firstName = req.user.firstName;
+    
+    res.render("user/logged-in/edit-password", {
+        "title": "Account",
+        "user": req.user,
+        "firstName": firstName,
+    });
+}
+
+exports.post_password_edit = function(req, res) {
+    var username = req.user.username;
+    var currentPassword = req.body.currentPassword;
+    var newPassword = req.body.newPassword;
+    var conPassword = req.body.conPassword;
+
+    if (!currentPassword || !newPassword || !conPassword) {
+        res.sendStatus(401);
+        console.log("You need to fill out all of the fields.")
+        return;
+    } else if (!bcrypt.compareSync(currentPassword, req.user.password)) {
+        res.sendStatus(401);
+        console.log("Current password incorrect.")
+        return;
+    } else if (newPassword != conPassword) {
+        res.sendStatus(401);
+        console.log("Passwords don't match.")
+        return;
+    } else {
+        user.updatePassword(username, newPassword);
+        res.redirect("/" + username + "/account");
+    }
+}
+
+exports.show_account_delete = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    
+    res.render("user/logged-in/delete-account", {
+        "title": "Account",
+        "user": req.user,
+        "firstName": firstName,
+    });
+}
+
+exports.post_account_delete = function(req, res) {
+    var username = req.user.username;
+    var password = req.body.password;
+
+    if (!password) {
+        res.sendStatus(401);
+        console.log("You need to enter your password to delete your account.")
+        return;
+    } else if (!bcrypt.compareSync(password, req.user.password)) {
+        res.sendStatus(401);
+        console.log("Password incorrect.")
+        return;
+    } else {
+        user.delete(username);
+    }
+
+    res.redirect("/");
 }
 
 exports.show_achievements = function(req, res) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
+    
     var achievements = Object.entries(req.user.achievements);
     var achieveData = new Array();
     for (var i = 0; i < achievements.length; i++) {
@@ -90,12 +242,14 @@ exports.show_achievements = function(req, res) {
         "title": "Achievements",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "achievements": achieveData,
     });
 }
 
 exports.show_achievement = function(req, res) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
     var name  = req.params.name;
     var achievements = Object.entries(req.user.achievements);
     var achievement;
@@ -115,6 +269,7 @@ exports.show_achievement = function(req, res) {
         "title": username,
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "achievement": achievement,
         "earned": earned,
     });
@@ -122,10 +277,12 @@ exports.show_achievement = function(req, res) {
 
 exports.show_new_goal = function(req, res) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
     res.render("user/logged-in/add-goal", {
         "title": "Add New Goal",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
     });
 }
 
@@ -152,6 +309,8 @@ exports.post_new_goal = function(req, res) {
 
 exports.show_goals = function(req, res) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
+    
     var goals = Object.entries(req.user.goals);
     var setGoalData = new Array();
     var completeGoalData = new Array();
@@ -173,6 +332,7 @@ exports.show_goals = function(req, res) {
         "title": "Goals",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "sGoals": setGoalData,
         "cGoals": completeGoalData,
     });
@@ -180,6 +340,7 @@ exports.show_goals = function(req, res) {
 
 exports.show_goal = function(req, res) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
     var id = req.params.id;
     var goal = Object.entries(req.user.goals);
     var goalData;
@@ -232,6 +393,7 @@ exports.show_goal = function(req, res) {
         "title": "Aye",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "goal": goalData,
         "sGoal": sGoal,
         "sType": sType,
@@ -247,6 +409,7 @@ exports.show_goal = function(req, res) {
 
 exports.show_edit_goal = function(req, res) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
     var id = req.params.id;
     var goal = Object.entries(req.user.goals);
     var goalData;
@@ -270,6 +433,7 @@ exports.show_edit_goal = function(req, res) {
         "title": "Edit Goal",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "name": goalData.name,
         "fitness": fitness,
         "health": health,
@@ -288,6 +452,21 @@ exports.post_edit_goal = function(req, res) {
     var dateSet = req.body.date;
     dateSet =  Date.parse(dateSet);
     var description = req.body.description;
+    var dateCreated;
+    var dateComplete;
+    var complete;
+
+    var goal = Object.entries(req.user.goals);
+    var goalData;
+
+    for (var i = 0; i < goal.length; i++) {
+        if (goal[i][1].id == id) {
+            goalData = goal[i][1];
+            dateCreated = goalData.dateCreated;
+            dateComplete = goalData.dateComplete;
+            complete = goalData.complete;
+        }
+    }
 
     if (!name || !type || !dateSet || !description) {
         res.sendStatus(401);
@@ -295,13 +474,14 @@ exports.post_edit_goal = function(req, res) {
         return;
     }
 
-    // Update function link here.
+    user.editGoal(username, name, type, complete, dateCreated, dateSet, dateComplete, description, id);
 
     res.redirect("/" + username + "/goal/" + id);
 }
 
 exports.show_complete_goal = function(req, res, next) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
     var id = req.params.id;
     var goal = Object.entries(req.user.goals);
     var goalData;
@@ -324,6 +504,7 @@ exports.show_complete_goal = function(req, res, next) {
         "title": "Complete Goal",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "goal": goalData,
         "id": id,
     });
@@ -332,14 +513,24 @@ exports.show_complete_goal = function(req, res, next) {
 exports.post_complete_goal = function(req, res, next) {
     var username = req.user.username;
     var id = req.params.id;
+    var goal = Object.entries(req.user.goals);
+    var dateComplete = Math.round((Date.now() / 1000)) * 1000;
+    var type;
 
-    // Complete function link here.
+    for (var i = 0; i < goal.length; i++) {
+        if (goal[i][1].id == id) {
+            type = goal[i][1].type;
+        }
+    }
+
+    user.completeGoal(username, id, type, dateComplete);
 
     res.redirect("/" + username + "/goal/" + id);
 }
 
 exports.show_delete_goal = function(req, res, next) {
     var username = req.user.username;
+    var firstName = req.user.firstName;
     var id = req.params.id;
     var goal = Object.entries(req.user.goals);
     var goalData;
@@ -362,6 +553,7 @@ exports.show_delete_goal = function(req, res, next) {
         "title": "Complete Goal",
         "user": req.user,
         "username": username,
+        "firstName": firstName,
         "goal": goalData,
         "id": id,
     });
@@ -371,7 +563,7 @@ exports.post_delete_goal = function(req, res, next) {
     var username = req.user.username;
     var id = req.params.id;
 
-    // Delete function link here.
+    user.deleteGoal(username, id);
     
     res.redirect("/" + username + "/goals");
 }
