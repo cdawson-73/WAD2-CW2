@@ -6,7 +6,7 @@ const userModel = require("../models/userModel.js");
 exports.init = function(app) {
     passport.use(new Strategy(
         function(username, password, cb) {
-            userModel.lookup(username, function(err, user) {
+            userModel.lookupUser(username, function(err, user) {
                 if (err) {
                     console.log("Error finding user.", err);
                     return cb(err);
@@ -29,7 +29,7 @@ exports.init = function(app) {
         cb(null, user.username);
     });
     passport.deserializeUser(function(id, cb) {
-        userModel.lookup(id, function(err, user) {
+        userModel.lookupUser(id, function(err, user) {
             if (err) {
                 return cb(err);
             }
