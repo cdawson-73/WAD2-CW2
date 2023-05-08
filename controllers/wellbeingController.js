@@ -2,6 +2,8 @@ const user = require("../models/userModel.js");
 const auth = require("../auth/auth.js");
 const bcrypt = require("bcrypt");
 
+const { sendEmail } = require("../utils/sendEmail.js")
+
 exports.show_homepage = function(req, res) {
     
     res.render("guest/home", {
@@ -35,7 +37,7 @@ exports.show_login = function(req, res) {
     });
 }
 
-auth.authorize("/login");
+//auth.authorize("/login");
 
 exports.post_login = function(req, res) {
     var username = req.user.username;
@@ -48,6 +50,29 @@ exports.show_signup = function(req, res) {
     res.render("user/register", {
         "title": "Sign Up"
     });
+}
+
+exports.show_forgot_password = function(req, res) {
+    res.render("user/forgot-password", {
+        "title": "Forgot Password"
+    });
+}
+
+exports.post_forgot_password = function(req, res) {
+    console.log("Is it even getting here?")
+    var email = req.body.email;
+    
+    // Delete When Working
+
+    var subject = req.body.subject;
+    var text = req.body.text;
+
+    console.log("Passing", email, subject, text);
+
+    sendEmail(email, subject, text);
+    //user.passwordReset();
+
+    res.redirect('/login');
 }
 
 exports.post_new_user = function(req, res) {
