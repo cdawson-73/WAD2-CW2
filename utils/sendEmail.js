@@ -1,9 +1,7 @@
 const nodemailer = require("nodemailer");
 
-exports.sendEmail = (email, subject, text) => {
-    console.log("Reaching function.");
+exports.sendEmail = (email, subject, content) => {
     try {
-        console.log("Reaching try.")
         let transporter = nodemailer.createTransport({
             host: process.env.HOST,
             port: process.env.EMAILPORT,
@@ -18,7 +16,7 @@ exports.sendEmail = (email, subject, text) => {
             from: process.env.USER,
             to: email,
             subject: subject,
-            text: text,
+            html: content,
         });
 
         console.log("email sent sucessfully");
