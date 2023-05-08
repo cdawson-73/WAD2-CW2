@@ -23,13 +23,16 @@ class UserDao {
         }
     }
 
-    create(username, password) {
+    create(username, password, email, firstName, lastName) {
         const that = this.uDb;
         bcrypt.hash(password, saltRounds).then(function(hash) {
             var achievements = achieve();
             var entry = {
                 username: username,
                 password: hash,
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
                 generalSet: 0,
                 generalComplete: 0,
                 fitnessSet: 0,
@@ -51,7 +54,7 @@ class UserDao {
         });
     }
 
-    lookup(user, cb) {
+    lookupUser(user, cb) {
         this.uDb.find({"username": user}, function(err, entries) {
             if (err) {
                 return cb(null, null);
@@ -61,6 +64,86 @@ class UserDao {
                 }
                 return cb(null, entries[0]);
             }
+        });
+    }
+
+    lookupEmail(email, cb) {
+        this.uDb.find({"email": email}, function(err, entries) {
+            if (err) {
+                return cb(null, null);
+            } else {
+                if (entries.length == 0) {
+                    return cb(null, null);
+                }
+                return cb(null, entries[0]);
+            }
+        });
+    }
+
+    update(username, email, firstName, lastName) {
+        var db = this.uDb;
+            return new Promise((resolve, reject) => {
+                db.update({
+                    username: username,
+                    },{
+                        $set:{
+                                email: email,
+                                firstName: firstName,
+                                lastName: lastName,
+                        }
+                    },{
+                        upsert: true
+                    },
+                    function(err, goal) {
+                        if(err){
+                            reject(err);
+                        } else {
+                            resolve(goal);
+                            console.log("User edited.")
+                        }
+                    });
+            });
+    }
+
+    updatePassword(username, password) {
+        var db = this.uDb;
+        bcrypt.hash(password, saltRounds).then(function(hash) {
+            return new Promise((resolve, reject) => {
+                db.update({
+                    username: username,
+                    },{
+                        $set:{
+                                password: hash,
+                        }
+                    },{
+                        upsert: true
+                    },
+                    function(err, goal) {
+                        if(err){
+                            reject(err);
+                        } else {
+                            resolve(goal);
+                            console.log("Password edited.")
+                        }
+                    });
+            });
+        });
+    }
+
+    delete(username) {
+        var db = this.uDb;
+        return new Promise((resolve, reject) =>{
+            db.remove({
+                username: username,
+            },function(err, goal) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(goal);
+                    console.log("User deleted.");
+                    console.log(goal);
+                }
+            });
         });
     }
 
@@ -78,7 +161,6 @@ class UserDao {
                 },
                 $set:{
                     [goals]: {
-                        
                         name: name,
                         type: type,
                         complete: complete,
@@ -89,21 +171,61 @@ class UserDao {
                         id: id,
                 }
             }},
-            function(err, goal){
+            function(err, goal) {
                 if(err){
                     reject(err);
                 } else {
                     resolve(goal);
-                    console.log("Goal added.")
+                    console.log("Goal added.");
                 }
             });
             this.updateAchievement(username);
-    })}
+    });
+}
 
-    completeGoal(username, id) {
+    editGoal(username, name, type, complete, dateCreated, dateSet, dateComplete, description, id) {
+        var typeIncrement = type.concat("Set");
+        var db = this.uDb;
+        var goals = "goals." + id;
+        return new Promise((resolve, reject) => {
+        db.update({
+            username: username,
+            },{
+                $inc: {
+                    [typeIncrement]: 1,
+                },
+                $set:{
+                    [goals]: {
+                        name: name,
+                        type: type,
+                        complete: complete,
+                        dateCreated: dateCreated,
+                        dateSet: dateSet,
+                        dateComplete: dateComplete,
+                        description: description,
+                        id: id,
+                    }
+                }
+            },{
+                upsert: true
+            },
+            function(err, goal) {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(goal);
+                    console.log("Goal edited.")
+                }
+            });
+            this.updateAchievement(username);
+    })
+    }
+
+    completeGoal(username, id, type, dateComplete) {
         var typeIncrement = type.concat("Complete");
         var db = this.uDb;
-        var goal = "goals." + id;
+        var goalCompStat = "goals." + id + ".complete";
+        var goalCompDate = "goals." + id + ".dateComplete";
         return new Promise((resolve, reject) =>{
             db.update({
                 username: username
@@ -113,16 +235,43 @@ class UserDao {
                     generalComplete: 1,
                 },
                 $set: {
-                    [goal]: {
-
-                    }
+                    [goalCompStat]: "true",
+                    [goalCompDate]: dateComplete,
                 }
-            })
+            },
+            function(err, goal) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(goal);
+                    console.log("Goal complete.");
+                    console.log(goal);
+                }
+            });
+            this.updateAchievement(username);
         });
     }
 
-    deleteGoal(username) {
-
+    deleteGoal(username, id) {
+        var db = this.uDb;
+        var goals = "goals." + id;
+        return new Promise((resolve, reject) =>{
+            db.update({
+                username: username
+            },{
+                $unset: {
+                    [goals]: true,
+                },
+            },function(err, goal) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(goal);
+                    console.log("Goal deleted.");
+                    console.log(goal);
+                }
+            });
+        });
     }
 
     updateAchievement(username) {
