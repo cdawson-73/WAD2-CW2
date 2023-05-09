@@ -3,13 +3,18 @@
 <h2>Users Only</h2>
 <h3>Welcome {{firstName}}</h3>
 <div class="container">
+    {{#error}}
+    <div class="alert alert-danger">
+        {{error}}
+    </div>
+    {{/error}}
     <form method="post" role="/edit-goal">
         <div class="form-group">
             <label for="name">
                 Goal Name
             </label>
             <div class="col-sm-10">
-                <input type="text" id="name" name="name" value="{{name}}" placeholder="Enter Goal Name" required>
+                <input type="text" id="name" name="name" value="{{name}}" placeholder="Enter Goal Name">
             </div>
             <label for="type">
                 Type Option
@@ -28,7 +33,7 @@
                 Target Date
             </label>
             <div class="col-sm-10">
-                <input type="date" id="date" name="date" value="{{date}}">
+                <input type="date" id="date" name="date" min="{{minDate}}" value="{{date}}">
             </div>
             <label for="description">
                 Goal Description

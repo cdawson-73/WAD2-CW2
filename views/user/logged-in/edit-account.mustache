@@ -4,13 +4,18 @@
 <h3>Welcome {{firstName}}</h3>
 {{#user}}
 <div class="container">
+    {{#error}}
+    <div class="alert alert-danger">
+        {{error}}
+    </div>
+    {{/error}}
     <form method="post" role="/update-account">
         <div class="form-group">
             <label for="email">
                 Email
             </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="email" name="email" value="{{email}}" placeholder="Enter Email" required>
+                <input type="text" class="form-control" id="email" name="email" value="{{email}}" placeholder="Enter Email">
             </div>
         </div>
         <div class="form-group">
@@ -18,7 +23,7 @@
                 First Name
             </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="firstName" name="firstName" value="{{firstName}}" placeholder="Enter First Name" required>
+                <input type="text" class="form-control" id="firstName" name="firstName" value="{{firstName}}" placeholder="Enter First Name">
             </div>
         </div>
         <div class="form-group">
@@ -26,7 +31,7 @@
                 Last Name
             </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="lastName" name="lastName" value="{{lastName}}" placeholder="Enter Last Name" required>
+                <input type="text" class="form-control" id="lastName" name="lastName" value="{{lastName}}" placeholder="Enter Last Name">
             </div>
         </div>
         <div class="form-group">
@@ -34,7 +39,7 @@
                 Enter Password To Update Details
             </label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
             </div>
         </div>
         <div class="form-group">
