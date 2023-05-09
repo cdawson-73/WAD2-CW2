@@ -12,7 +12,8 @@ exports.init = function(app) {
                     return cb(err);
                 }
                 if (!user) {
-                    console.log("User ", username, " not found.");
+                    console.log("User", username, "not found.");
+
                     return cb(null, false);
                 }
                 bcrypt.compare(password, user.password, function(err, result) {
@@ -42,6 +43,7 @@ exports.init = function(app) {
 
 exports.authorize = function(redirect) {
     return passport.authenticate("local", {
-        failureRedirect: redirect
+        failureRedirect: redirect,
+        failureMessage: "Invalid Username Or Password"
     });
 }
