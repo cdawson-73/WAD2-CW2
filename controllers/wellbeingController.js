@@ -1,21 +1,21 @@
 const user = require("../models/userModel.js");
+const articles = require("../models/wellbeingModel.js");
 const bcrypt = require("bcrypt");
 const { sendEmail } = require("../utils/sendEmail.js");
 const validator = require("validator");
 
 
 exports.show_homepage = function(req, res) {
-    
     res.render("guest/home", {
         "title": "Wellbeing HQ",
         "user": req.user,
     });
 }
 
-exports.show_about = function(req, res) {
+exports.show_terms = function(req, res) {
     
-    res.render("guest/about", {
-        "title": "About Us",
+    res.render("guest/terms-and-conditions", {
+        "title": "Terms & Conditions",
         "user": req.user,
     });
 };
@@ -601,12 +601,14 @@ exports.show_goal = function(req, res) {
     var cDateCreated;
     var cTargetDate;
     var cDateComplete;
+    var name;
 
     for (var i = 0; i < goal.length; i++) {
         if (goal[i][1].id == id) {
             goalData = goal[i][1];
             if (goalData.complete == "true") {
                 cGoal = goalData;
+                name = cGoal.name;
                 cDateComplete = new Intl.DateTimeFormat("en-GB").format(cGoal.dateComplete);
                 if (goalData.type == "fitness") {
                     cType = "Fitness";
@@ -620,6 +622,7 @@ exports.show_goal = function(req, res) {
                 cTargetDate = new Intl.DateTimeFormat("en-GB").format(cGoal.dateSet);
             } else {
                 sGoal = goalData;
+                name = sGoal.name;
                 if (goalData.type == "fitness") {
                     sType = "Fitness";
                 } else if (goalData.type == "health") {
@@ -651,6 +654,7 @@ exports.show_goal = function(req, res) {
         "cDateCreated": cDateCreated,
         "cDateSet": cTargetDate,
         "cDateComplete": cDateComplete,
+        "name": name,
     });
 }
 
@@ -768,10 +772,12 @@ exports.show_complete_goal = function(req, res, next) {
     var goalData;
     var createDateFormat;
     var setDateFormat;
+    var name;
 
     for (var i = 0; i < goal.length; i++) {
         if (goal[i][1].id == id) {
             goalData = goal[i][1];
+            name = goalData.name;
             createDateFormat = goalData.dateCreated;
             setDateFormat = goalData.dateSet;
             createDateFormat = new Intl.DateTimeFormat("en-GB").format(createDateFormat);
@@ -788,6 +794,7 @@ exports.show_complete_goal = function(req, res, next) {
         "firstName": firstName,
         "goal": goalData,
         "id": id,
+        "name": name,
     });
 }
 
@@ -816,10 +823,12 @@ exports.show_delete_goal = function(req, res, next) {
     var goalData;
     var createDateFormat;
     var setDateFormat;
+    var name;
 
     for (var i = 0; i < goal.length; i++) {
         if (goal[i][1].id == id) {
             goalData = goal[i][1];
+            name = goalData.name;
             createDateFormat = goalData.dateCreated;
             setDateFormat = goalData.dateSet;
             createDateFormat = new Intl.DateTimeFormat("en-GB").format(createDateFormat);
@@ -835,6 +844,7 @@ exports.show_delete_goal = function(req, res, next) {
         "username": username,
         "firstName": firstName,
         "goal": goalData,
+        "name": name,
         "id": id,
     });
 }
@@ -845,6 +855,98 @@ exports.post_delete_goal = function(req, res, next) {
 
     user.deleteGoal(username, id);
     res.redirect("/" + username + "/goals");
+}
+
+exports.show_articles = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+
+    res.render("user/logged-in/articles", {
+        "title": "Wellbeing HQ Articles",
+        "user": req.user,
+        "username": username,
+        "firstName": firstName,
+    });
+}
+
+exports.show_article = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    var articleTitle = req.params.articleTitle;
+
+    articles.article(articleTitle).then((data) => {
+        article = data;
+
+        var articleDate = article[0].dateCreated;
+        var articleContent = validator.unescape(article[0].content);
+
+
+        var date = new Intl.DateTimeFormat("en-GB").format(articleDate);
+        var time = new Intl.DateTimeFormat("default", {hourCycle: "h12", hour: "numeric", minute: "numeric", second: "numeric"}).format(articleDate);
+        var timeDate = "Published at " + time + " on " + date ;
+
+
+        res.render("user/logged-in/article", {
+            "title": articleTitle,
+            "user": req.user,
+            "username": username,
+            "firstName": firstName,
+            "article": article,
+            "timeDate": timeDate,
+            "articleContent": articleContent,
+        });
+    });
+}
+
+exports.show_fitness_articles = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    var fitnessArticles;
+    articles.fitnessArticles().then((data) => {
+        fitnessArticles = data;
+
+        res.render("user/logged-in/topic/fitness", {
+            "title": "Fitness Articles",
+            "user": req.user,
+            "username": username,
+            "firstName": firstName,
+            "articles": fitnessArticles,
+        });
+    });
+}
+
+exports.show_health_articles = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    var healthArticles;
+    articles.healthArticles().then((data) => {
+        healthArticles = data;
+
+        res.render("user/logged-in/topic/healthy-living", {
+            "title": "Healthy-Living Articles",
+            "user": req.user,
+            "username": username,
+            "firstName": firstName,
+            "articles": healthArticles,
+        });
+    });
+}
+
+exports.show_nutrition_articles = function(req, res) {
+    var username = req.user.username;
+    var firstName = req.user.firstName;
+    var nutritionArticles;
+    articles.nutritionArticles().then((data) => {
+        nutritionArticles = data;
+
+        res.render("user/logged-in/topic/nutrition", {
+            "title": "Nutrition Articles",
+            "user": req.user,
+            "username": username,
+            "firstName": firstName,
+            "articles": nutritionArticles,
+        });
+    });
 }
 
 exports.logout = function(req, res, next) {

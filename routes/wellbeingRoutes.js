@@ -6,7 +6,7 @@ const loginCheck = require("connect-ensure-login");
 
 // Pages anyone can access.
 router.get("/", controller.show_homepage);
-router.get("/about", controller.show_about);
+router.get("/terms-and-conditions", controller.show_terms);
 router.get("/useful-links", controller.show_usefull);
 
 // Login page.
@@ -63,6 +63,21 @@ router.post("/:username/complete-goal/:id", loginCheck.ensureLoggedIn("/login"),
 // Delete Goal.
 router.get("/:username/delete-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.show_delete_goal);
 router.post("/:username/delete-goal/:id", loginCheck.ensureLoggedIn("/login"), controller.post_delete_goal);
+
+// Articles
+router.get("/:username/articles", loginCheck.ensureLoggedIn("/login"), controller.show_articles);
+
+// Fitness
+router.get("/:username/fitness", loginCheck.ensureLoggedIn("/login"), controller.show_fitness_articles);
+
+// Healthy-Living
+router.get("/:username/healthy-living", loginCheck.ensureLoggedIn("/login"), controller.show_health_articles);
+
+// Nutrition
+router.get("/:username/nutrition", loginCheck.ensureLoggedIn("/login"), controller.show_nutrition_articles);
+
+// Individual
+router.get("/:username/article/:articleTitle", loginCheck.ensureLoggedIn("/login"), controller.show_article);
 
 // Log out page.
 router.get("/logout", controller.logout);

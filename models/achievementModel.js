@@ -17,7 +17,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "10 goals set, this is ",
+            description: "10 goals set, keep up the great work!",
         },
         three: {
             name: "20 Goals Set",
@@ -25,7 +25,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Wow, 20 goals? Now lets get them completed.",
         },
         four: {
             name: "First Goal Complete",
@@ -33,7 +33,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Congrats, you've completed your first goal.",
         },
         five: {
             name: "10 Goals Completed",
@@ -41,7 +41,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "10 goals down, got another 10 in you?",
         },
         six: {
             name: "20 Goals Completed",
@@ -49,7 +49,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Excellent work, 20 goals completed.",
         },
         seven: {
             name: "First Fitness Goal Set",
@@ -57,7 +57,7 @@ exports.achieve = function(){
             type: "fitness",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "That first fitness goal is always the hardest, let's show it who's boss.",
         },
         eight: {
             name: "10 Fitness Goals Set",
@@ -65,7 +65,7 @@ exports.achieve = function(){
             type: "fitness",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Nice, 10 fitness goals set!",
         },
         nine: {
             name: "20 Fitness Goals Set",
@@ -73,7 +73,7 @@ exports.achieve = function(){
             type: "fitness",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Oh wow, 20 fitness goals set.",
         },
         ten: {
             name: "First Fitness Goal Completed",
@@ -81,7 +81,7 @@ exports.achieve = function(){
             type: "fitness",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Exercise is good for the soul, 1 fitness goal complete.",
         },
         eleven: {
             name: "10 Fitness Goals Completed",
@@ -89,7 +89,7 @@ exports.achieve = function(){
             type: "fitness",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "10 fitness goals completed. You got this!",
         },
         twelve: {
             name: "20 Fitness Goals Completed",
@@ -97,7 +97,7 @@ exports.achieve = function(){
             type: "fitness",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Fitness is your passion. 20 fitness goals completed. Don't stop here though.",
         },
         thirteen: {
             name: "First Healthy-Living Goal Set",
@@ -105,7 +105,7 @@ exports.achieve = function(){
             type: "healthy-living",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "You've set your first healthy-living goal.",
         },
         fourteen: {
             name: "10 Healthy-Living Goals Set",
@@ -113,7 +113,7 @@ exports.achieve = function(){
             type: "healthy-living",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "10 healthy-living goals set.",
         },
         fifteen: {
             name: "20 Healthy Living Goals Set",
@@ -121,7 +121,7 @@ exports.achieve = function(){
             type: "healthy-living",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "How many? 20 healthy living goals set!",
         },
         sixteen: {
             name: "First Healthy-Living Goal Completed",
@@ -129,7 +129,7 @@ exports.achieve = function(){
             type: "healthy-living",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "You've done it, first healthy-living goal completed.",
         },
         seventeen: {
             name: "10 Healthy-Living Goals Completed",
@@ -137,7 +137,7 @@ exports.achieve = function(){
             type: "healthy-living",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "You've completed 20 healthy-living goals. You must feel great.",
         },
         eighteen: {
             name: "20 Healthy-Living Goals Completed",
@@ -145,7 +145,7 @@ exports.achieve = function(){
             type: "healthy-living",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "20 healthy-living goals smashed. What a champ!",
         },
         nineteen: {
             name: "First Nutrition Goal Set",
@@ -153,7 +153,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "To feel well, you gotta eat well. First nutrition goal set",
         },
         twenty: {
             name: "10 Nutrition Goals Set",
@@ -161,7 +161,7 @@ exports.achieve = function(){
             type: "nutrition",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "10 nutrition goals set, now let's get them completed.",
         },
         twentyone: {
             name: "20 Nutrition Goals Set",
@@ -169,7 +169,7 @@ exports.achieve = function(){
             type: "nutrition",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Holy smokes, 20 nutrition goals set, that must be some kinda record?",
         },
         twentytwo: {
             name: "First Nutrition Goal Completed",
@@ -177,7 +177,7 @@ exports.achieve = function(){
             type: "nutrition",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Eating healthy isn't that difficult, you just proved it. First nutrition goal completed.",
         },
         twentythree: {
             name: "10 Nutrition Goals Completed",
@@ -185,7 +185,7 @@ exports.achieve = function(){
             type: "nutrition",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "10 nutrition goals completed. A new taste for completing goals it seems.",
         },
         twentyfour: {
             name: "20 Nutrition Goals Completed",
@@ -193,7 +193,7 @@ exports.achieve = function(){
             type: "",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "You've done it. 20 nutrition goals completed.",
         },
         twentyfive: {
             name: "You've Completed It",
@@ -201,7 +201,7 @@ exports.achieve = function(){
             type: "general",
             achieved: "unachieved",
             dateAchieved: "null",
-            description: "",
+            description: "Wow, you've completed every achievement. Major pat on the back. Don't stop here though, keep setting and completing goals like the legend you are.",
         },
     }
 
