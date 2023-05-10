@@ -135,3 +135,4 @@ template.mustache
 
 # Database files always changing, no need to be on GitHub. 
 users.db
+articles.db
