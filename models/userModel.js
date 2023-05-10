@@ -180,7 +180,6 @@ class UserDao {
                 } else {
                     resolve(user);
                     console.log("User deleted.");
-                    console.log(user);
                 }
             });
         });
@@ -284,7 +283,6 @@ class UserDao {
                 } else {
                     resolve(goal);
                     console.log("Goal complete.");
-                    console.log(goal);
                 }
             });
             this.updateAchievement(username);
@@ -307,7 +305,6 @@ class UserDao {
                 } else {
                     resolve(goal);
                     console.log("Goal deleted.");
-                    console.log(goal);
                 }
             });
         });
