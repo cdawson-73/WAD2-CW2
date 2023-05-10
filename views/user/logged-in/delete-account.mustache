@@ -1,44 +1,49 @@
 {{>page-partials/header}}
-<h1>Delete Account</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
-{{#user}}
-<div class="container">
-    <div class="">
-        Username: {{username}}
-    </div>
-    <div class="">
-        Name: {{firstName}} {{lastName}}
-    </div>
-    <div class="">
-        Email: {{email}}
-    </div>
-    <div>
-        Enter your password and click the delete button to permanently remove your account. This action cannot be undone.
-    </div>
-    <div>
-    {{#error}}
-    <div class="alert alert-danger">
-        {{error}}
-    </div>
-    {{/error}}
-        <form method="post" role="/delete-account">
-            <div class="form-group">
-                <label for="password">
-                    Password
-                </label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Delete Account" class="btn btn-primary">
-            </div>
-        </form>
-    </div>
-    <div class="form-group btn btn-primary">
-        <a href="/{{username}}/account" class="button-link">Back To Account</a>
-    </div>
+<div class="page-title">
+    <h1>Delete Account</h1>
 </div>
-{{/user}}
+<div class="page-subtitle">
+    <h3>This Cannot Be Undone</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        {{#user}}
+        <div class="">
+            Username: {{username}}
+        </div>
+        <div class="">
+            Name: {{firstName}} {{lastName}}
+        </div>
+        <div class="">
+            Email: {{email}}
+        </div>
+        <div>
+            Enter your password and click the delete button to permanently remove your account. This action cannot be undone.
+        </div>
+        <div>
+        {{#error}}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+        {{/error}}
+            <form method="post" role="/delete-account">
+                <div class="form-group">
+                    <label for="password">
+                        Password
+                    </label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="btn btn-primary">
+                        <a href="/{{username}}/account" class="button-link">Back To Account</a>
+                    </div>
+                    <input type="submit" value="Delete Account" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+    </div>
+    {{/user}}
+  </div>
 {{>page-partials/footer}}

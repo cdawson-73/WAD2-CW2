@@ -1,29 +1,29 @@
 {{>page-partials/header}}
-<h1>Achievement</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
 {{#achievement}}
-<div class="">
-    <div class="">
-        {{name}}
-    </div>
-    <div class="achievement-images">
-        <div class="{{achieved}}">
-            <img src="{{image}}">
+<div class="page-title">
+    <h1>{{name}}</h1>
+</div>
+<div class="page-subtitle">
+    <h3>Type: {{type}}</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="achievement-images">
+            <div class="{{achieved}}">
+                <img src="{{image}}">
+            </div>
         </div>
-    </div>
-    <div class="">
-        Type: {{type}}
-    </div>
-    <div class="">
-        {{earned}}
-    </div>
-    <div class="">
-        Description: {{description}}
+        <div class="">
+            {{earned}}
+        </div>
+        <div class="description">
+            Description: {{description}}
+        </div>
+        <div class="btn btn-primary">
+            <a href="/{{username}}/achievements" class="button-link">Back To Achievements</a>
+        </div>
     </div>
 </div>
 {{/achievement}}
-<div class="form-group btn btn-primary">
-    <a href="/{{username}}/achievements" class="button-link">Back To Achievements</a>
-</div>
+
 {{>page-partials/footer}}

@@ -1,0 +1,32 @@
+{{>page-partials/header}}
+<div class="page-title">
+    <h1>Fitness</h1>
+</div>
+<div class="page-subtitle">
+    <h3>Top Tips To Keep You Fit</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        {{#articles}}
+        <div class="content-wrap">
+            <div class="individual-content">
+                <a href="/{{username}}/article/{{articleTitle}}">
+                    <div class="">
+                        <h3>{{articleTitle}}</h3>
+                    </div>
+                </a>
+                <div class="">
+                    {{articleSubtitle}}
+                </div>
+                <div class="">
+                    By {{author}}
+                </div>
+            </div>
+        </div>
+        {{/articles}}
+        <div class="btn btn-primary">
+            <a href="/{{username}}/articles" class="button-link">Back To Articles</a>
+        </div>
+  </div>
+</div>
+{{>page-partials/footer}}

@@ -1,102 +1,109 @@
 {{>page-partials/header}}
-<h1>Goals</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
-<h3><a href="/{{username}}/add-goal">Add New Goal</a></h3>
-<div>
-    Goal Totals
+<div class="page-title">
+    <h1>{{firstName}}'s Goals</h1>
 </div>
-<div class="goals d-flex justify-content-around" >
-    <div class="goals-types">
-        <h4>Goals Set</h4>
-        {{#user}}
-        <div class="toals-container">
-            <div class="total">
-                Total: {{generalSet}}
+<div class="page-subtitle">
+    <h3>View And Add Goals</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h3><a href="/{{username}}/add-goal">Add New Goal</a></h3>
+        <div>
+            Goal Totals
+        </div>
+        <div class="goals d-flex justify-content-around" >
+            <div class="goals-types">
+                <h4>Goals Set</h4>
+                {{#user}}
+                <div class="toals-container">
+                    <div class="total">
+                        Total: {{generalSet}}
+                    </div>
+                    <div class="each">
+                        <div>
+                            Fitness: {{fitnessSet}}
+                        </div>
+                        <div>
+                            Healthy-Living: {{healthSet}}
+                        </div>
+                        <div>
+                            Nutrition: {{nutritionSet}}
+                        </div>
+                    </div>
+                </div>
+                {{/user}}
+                {{#sGoals}}
+                    <div class="goal-layout">
+                        <a href="/{{username}}/goal/{{id}}">
+                            <div class="">
+                                <h4>{{name}}</h4>
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    <img src="/img/goals/{{type}}.png"  class="goal-images">
+                                </div>
+                            </div>
+                            <div class="">
+                                Date Created: {{dateCreated}}
+                            </div>
+                        </a>
+                    </div>
+                    <br>
+                {{/sGoals}}
+                {{^sGoals}}
+                    <div class="">
+                        You have not set any goals.
+                    </div>
+                {{/sGoals}}
             </div>
-            <div class="each">
-                <div>
-                    Fitness: {{fitnessSet}}
-                </div>
-                <div>
-                    Healthy-Living: {{healthSet}}
-                </div>
-                <div>
-                    Nutrition: {{nutritionSet}}
+            <div class="goals-types">
+                <h4>Goals Complete</h4>
+                {{#user}}
+                <div class="totals-container">
+                    <div class="total">
+                        Total: {{generalComplete}}
+                    </div>
+                    <div class="each">
+                        <div>
+                            Fitness: {{fitnessComplete}}
+                        </div>
+                        <div>
+                            Healthy-Living: {{healthComplete}}
+                        </div>
+                        <div>
+                            Nutrition: {{nutritionComplete}}
+                        </div>
+                    </div>
+                {{/user}}
+                {{#cGoals}}
+                    <div class="goal-layout">
+                        <a href="/{{username}}/goal/{{id}}">
+                            <div class="">
+                                <h4>{{name}}</h4>
+                            </div>
+                            <div class="">
+                                <div class="">
+                                    <img src="/img/goals/{{type}}.png" class="goal-images">
+                                </div>
+                            </div>
+                            <div class="">
+                                Date Created: {{dateCreated}}
+                            </div>
+                        </a>
+                    </div>
+                    <br>
+                {{/cGoals}}
+                {{^cGoals}}
+                    <div class="">
+                        You have not completed any goals.
+                    </div>
+                {{/cGoals}}
                 </div>
             </div>
         </div>
-        {{/user}}
-        {{#sGoals}}
-            <div class="goal-layout">
-                <a href="/{{username}}/goal/{{id}}">
-                    <div class="">
-                        <h4>{{name}}</h4>
-                    </div>
-                    <div class="">
-                        <div class="">
-                            <img src="/img/goals/{{type}}.png"  class="goal-images">
-                        </div>
-                    </div>
-                    <div class="">
-                        Date Created: {{dateCreated}}
-                    </div>
-                </a>
-            </div>
-            <br>
-        {{/sGoals}}
-        {{^sGoals}}
-            <div class="">
-                You have not set any goals.
-            </div>
-        {{/sGoals}}
+        <div class="btn btn-primary">
+            <a href="/{{username}}/dashboard" class="button-link">Back To Dashboard</a>
+        </div>
     </div>
-    <div class="goals-types">
-        <h4>Goals Complete</h4>
-        {{#user}}
-        <div class="totals-container">
-            <div class="total">
-                Total: {{generalComplete}}
-            </div>
-            <div class="each">
-                <div>
-                    Fitness: {{fitnessComplete}}
-                </div>
-                <div>
-                    Healthy-Living: {{healthComplete}}
-                </div>
-                <div>
-                    Nutrition: {{nutritionComplete}}
-                </div>
-            </div>
-        {{/user}}
-        {{#cGoals}}
-            <div class="goal-layout">
-                <a href="/{{username}}/goal/{{id}}">
-                    <div class="">
-                        <h4>{{name}}</h4>
-                    </div>
-                    <div class="">
-                        <div class="">
-                            <img src="/img/goals/{{type}}.png" class="goal-images">
-                        </div>
-                    </div>
-                    <div class="">
-                        Date Created: {{dateCreated}}
-                    </div>
-                </a>
-            </div>
-            <br>
-        {{/cGoals}}
-        {{^cGoals}}
-            <div class="">
-                You have not completed any goals.
-            </div>
-        {{/cGoals}}
-    </div>
-</div>
-</div>
-<div class="form-group btn btn-primary">
-    <a href="/{{username}}/dashboard" class="button-link">Back To Dashboard</a>
-</div>
+  </div>
 {{>page-partials/footer}}

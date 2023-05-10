@@ -1,53 +1,58 @@
 {{>page-partials/header}}
-<h1>Edit Goal</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
-<div class="container">
-    {{#error}}
-    <div class="alert alert-danger">
-        {{error}}
-    </div>
-    {{/error}}
-    <form method="post" role="/edit-goal">
-        <div class="form-group">
-            <label for="name">
-                Goal Name
-            </label>
-            <div class="col-sm-10">
-                <input type="text" id="name" name="name" value="{{name}}" placeholder="Enter Goal Name">
-            </div>
-            <label for="type">
-                Type Option
-            </label>
-            <div class="col-sm-10">
-                <select name="type" id="type" value="{{type}}">
-                    {{#fitness}}<option value="fitness" selected>Fitness</option>{{/fitness}}
-                    {{^fitness}}<option value="fitness">Fitness</option>{{/fitness}}
-                    {{#health}}<option value="health" selected>Healthy-Living</option>{{/health}}
-                    {{^health}}<option value="health">Healthy-Living</option>{{/health}}
-                    {{#nutrition}}<option value="nutrition" selected>Nutrition</option>{{/nutrition}}
-                    {{^nutrition}}<option value="nutrition">Nutrition</option>{{/nutrition}}
-                </select>
-            </div>
-            <label for="date">
-                Target Date
-            </label>
-            <div class="col-sm-10">
-                <input type="date" id="date" name="date" min="{{minDate}}" value="{{date}}">
-            </div>
-            <label for="description">
-                Goal Description
-            </label>
-            <div class="col-sm-10">
-                <textarea id="description" name="description" rows="4" cols="50">{{description}}</textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Update Goal" class="btn btn-primary">
-        </div>
-        <div class="form-group btn btn-primary">
-            <a href="/{{username}}/goal/{{id}}" class="button-link">Back To Goal</a>
-        </div>
-    </form>
+<div class="page-title">
+    <h1>Edit {{name}}</h1>
 </div>
+<div class="page-subtitle">
+    <h3>Edit Your Goal</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        {{#error}}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+        {{/error}}
+        <form method="post" role="/edit-goal">
+            <div class="form-group">
+                <label for="name">
+                    Goal Name
+                </label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" name="name" value="{{name}}" placeholder="Enter Goal Name">
+                </div>
+                <label for="type">
+                    Type Option
+                </label>
+                <div class="col-sm-10">
+                    <select name="type" class="form-control" id="type" value="{{type}}">
+                        {{#fitness}}<option value="fitness" selected>Fitness</option>{{/fitness}}
+                        {{^fitness}}<option value="fitness">Fitness</option>{{/fitness}}
+                        {{#health}}<option value="health" selected>Healthy-Living</option>{{/health}}
+                        {{^health}}<option value="health">Healthy-Living</option>{{/health}}
+                        {{#nutrition}}<option value="nutrition" selected>Nutrition</option>{{/nutrition}}
+                        {{^nutrition}}<option value="nutrition">Nutrition</option>{{/nutrition}}
+                    </select>
+                </div>
+                <label for="date">
+                    Target Date
+                </label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" id="date" name="date" min="{{minDate}}" value="{{date}}">
+                </div>
+                <label for="description">
+                    Goal Description
+                </label>
+                <div class="col-sm-10">
+                    <textarea id="description" class="form-control" name="description" rows="4" cols="50">{{description}}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="btn btn-primary">
+                    <a href="/{{username}}/goal/{{id}}" class="button-link">Back To Goal</a>
+                </div>
+                <input type="submit" value="Update Goal" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+  </div>
 {{>page-partials/footer}}

@@ -1,45 +1,52 @@
 {{>page-partials/header}}
-<h1>Complete Goal</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
-<div>
-    Are you sure you want to complete this goal?
+<div class="page-title">
+    <h1>Complete Goal</h1>
 </div>
-{{#goal}}
-<div>
-    <div class="">
-        <h4>{{name}}</h4>
-    </div>
-    <div class="">
-        Type: {{type}}
-        <div class="goal">
-            <img src="/img/goals/{{type}}.png" class="goal-images">
+<div class="page-subtitle">
+    <h3>Mark {{name}} As Complete</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div>
+            Are you sure you want to complete this goal?
+        </div>
+        {{#goal}}
+        <div>
+            <div class="">
+                <h4>{{name}}</h4>
+            </div>
+            <div class="">
+                Type: {{type}}
+                <div class="goal">
+                    <img src="/img/goals/{{type}}.png" class="goal-images">
+                </div>
+            </div>
+            <div class="">
+                Date Created: {{dateCreated}}
+            </div>
+            <div class="">
+                Target Date: {{dateSet}}
+            </div>
+            <div class="">
+                Description: {{description}}
+            </div>
+        </div>
+        {{/goal}}
+        <div>
+            Once you mark it as complete you cannot undo this. You will also not be able to delete this completed goal.
+        </div>
+        <div>
+            <div>
+                <form method="post" role="/complete-goal">
+                    <div class="form-group">
+                        <div class="btn btn-primary">
+                            <a href="/{{username}}/goal/{{id}}" class="button-link">Back To Goal</a>
+                        </div>
+                        <input type="submit" value="Complete Goal" class="btn btn-primary">
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="">
-        Date Created: {{dateCreated}}
-    </div>
-    <div class="">
-        Target Date: {{dateSet}}
-    </div>
-    <div class="">
-        Description: {{description}}
-    </div>
-</div>
-{{/goal}}
-<div>
-    Once you mark it as complete you cannot undo this. You will also not be able to delete this completed goal.
-</div>
-<div>
-    <div>
-        <form method="post" role="/complete-goal">
-            <div class="form-group">
-                <input type="submit" value="Complete Goal" class="btn btn-primary">
-            </div>
-        </form>
-    </div>
-    <div class="form-group btn btn-primary">
-        <a href="/{{username}}/goal/{{id}}" class="button-link">Back To Goal</a>
-    </div>
-</div>
+  </div>
 {{>page-partials/footer}}

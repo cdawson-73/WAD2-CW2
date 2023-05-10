@@ -1,35 +1,41 @@
 {{>page-partials/header}}
-<h1>Login</h1>
-<h2>Everyone</h2>
-<div>(User's Can't If They're Signed In)</div>
-<div class="container">
-    <h2>Login</h2>
-    {{#error}}
-    <div class="alert alert-danger">
-        {{error}}
+<div class="page-title">
+    <h1>Login</h1>
+</div>
+<div class="page-subtitle">
+    <h3>Access Your Account Here</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        {{#error}}
+        <div class="alert alert-danger">
+            {{error}}
+        </div>
+        {{/error}}
+        <form method="post" action="/login" id="login-form">
+            <div class="form-group">
+                <label for="username">
+                    Username
+                </label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">
+                    Password
+                </label>
+                <div class="col-sm-7">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+                </div>
+            </div>
+            <div class="button-group">
+                <input type="submit" value="Login" id="login" class="btn btn-primary">
+                <div class="btn btn-primary">
+                    <a href="/reset-password" class="button-link">Forgot Password</a>
+                </div>
+            </div>
+        </form>
     </div>
-    {{/error}}
-    <form method="post" action="/login" id="login-form">
-        <div class="form-group">
-            <label for="username">
-                Username
-            </label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="password">
-                Password
-            </label>
-            <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
-            </div>
-        </div>
-        <input type="submit" value="Login" id="login" class="btn btn-primary">
-    </form>
-</div>
-<div class="form-group btn btn-primary">
-    <a href="/reset-password" class="button-link">Forgot Password</a>
-</div>
+  </div>
 {{>page-partials/footer}}

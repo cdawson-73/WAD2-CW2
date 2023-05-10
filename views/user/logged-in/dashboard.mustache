@@ -1,17 +1,24 @@
 {{>page-partials/header}}
-<h1>Account</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
-<div>
-    <p>
-        Some information will go here.
-        <br>
-        <ul>
-            <li><a href="/{{username}}/account">Account Details</a></li>
-            <li><a href="/{{username}}/achievements">Achievements</a></li>
-            <li><a href="/{{username}}/goals">Goals</a></li>
-            <li><a href="">Articles</a></li>
-        </ul>
-    </p>
+<div class="page-title">
+    <h1>{{firstName}}'s Dashboard</h1>
 </div>
+<div class="page-subtitle">
+    <h3>Everything You Need Is Here</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+      <div>
+        <a href="/{{username}}/account">Account Details</a>
+      </div>
+      <div>
+        <a href="/{{username}}/goals">Goals</a>
+      </div>
+      <div>
+        <a href="/{{username}}/achievements">Achievements</a>
+      </div>
+      <div>
+        <a href="/{{username}}/articles">Articles</a>
+      </div>
+    </div>
+  </div>
 {{>page-partials/footer}}

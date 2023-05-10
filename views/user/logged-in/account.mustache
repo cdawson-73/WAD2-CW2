@@ -1,29 +1,36 @@
 {{>page-partials/header}}
-<h1>Account</h1>
-<h2>Users Only</h2>
-<h3>Welcome {{firstName}}</h3>
-{{#user}}
-<div class="">
-    <div class="">
-        Name: {{firstName}} {{lastName}}
-    </div>
-    <div class="">
-        Email: {{email}}
-    </div>
-    <div class="button-multi">
-        <div class="form-group btn btn-primary">
-            <a href="/{{username}}/update-account" class="button-link">Update Details</a>
-        </div>
-        <div class="form-group btn btn-primary">
-            <a href="/{{username}}/update-password"class="button-link">Update Password</a>
-        </div>
-        <div class="form-group btn btn-primary">
-            <a href="/{{username}}/delete-account" class="button-link">Delete Account</a>
-        </div>
-    </div>
-    <div class="form-group btn btn-primary">
-        <a href="/{{username}}/dashboard" class="button-link">Back To Dashboard</a>
-    </div>
+<div class="page-title">
+    <h1>{{firstName}}'s Account</h1>
 </div>
-{{/user}}
+<div class="page-subtitle">
+    <h3>Your Account Page</h3>
+</div>
+<div class="card">
+    <div class="card-body">
+        {{#user}}
+        <div class="content-wrap">
+            <div class="name">
+                Name: {{firstName}} {{lastName}}
+            </div>
+            <div class="email">
+                Email: {{email}}
+            </div>
+            <div class="button-multi">
+                <div class="form-group btn btn-primary">
+                    <a href="/{{username}}/update-account" class="button-link">Update Details</a>
+                </div>
+                <div class="form-group btn btn-primary">
+                    <a href="/{{username}}/update-password"class="button-link">Update Password</a>
+                </div>
+                <div class="form-group btn btn-primary">
+                    <a href="/{{username}}/delete-account" class="button-link">Delete Account</a>
+                </div>
+            </div>
+            <div class="form-group btn btn-primary">
+                <a href="/{{username}}/dashboard" class="button-link">Back To Dashboard</a>
+            </div>
+        </div>
+        {{/user}}
+    </div>
+  </div>
 {{>page-partials/footer}}
