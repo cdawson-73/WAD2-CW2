@@ -526,6 +526,10 @@ h3 {
     display: flex;
     justify-content: center;
 }
+
+.image-overlay-text {
+    font-size: 15px;
+}
   
 }
 
@@ -564,6 +568,10 @@ h3 {
 
 .each {
     font-size: 25px;
+}
+
+.image-overlay-text {
+    font-size: 20px;
 }
 
 @media screen and (min-width: 1040px) {
