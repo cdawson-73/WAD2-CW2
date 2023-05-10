@@ -20,7 +20,7 @@ const auth = require("./auth/auth.js");
 const passport = require("passport");
 
 app.use(session({
-    secret: "thisisasecret",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false
 }));
