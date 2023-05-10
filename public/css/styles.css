@@ -6,11 +6,172 @@
 * {
     /*border: 1px solid red;*/
     font-family: "Arsenal", serif;
-    color: darkgreen;
+    color: #ffffff;
+    text-align: justify;
+}
+
+html, body {
+    background-color: #639a66 !important;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body > a, .card-body > * > a {
+    color: #ced37a !important;
+}
+
+.card-body > .btn-primary > a {
+    color: #ffffff !important;
+}
+
+input, select, textarea {
+    background-color: #a6ad7b !important;
+}
+
+.wellbeing-nav {
+    background-color: #efc23a;
+}
+
+.wellbeing-nav-text {
+    color: #639a66;
+    font-size: 20px;
+}
+
+.wellbeing-footer {
+    background-color: #1b6442;
+    margin-top: auto;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    padding: 10px;
+}
+
+.wellbeing-footer-text {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.wellbeing-footer-text > a{
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.wellbeing-logo {
+    height: 50px;
+    border-radius: 5px;
+}
+
+.container {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    margin-bottom: 10px;
+}
+
+.container-sm {
+    background-color: #ced37a;
+    border-radius: 25px;
+    padding: 20px;
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-title {
+    align-self: center;
+    background-color: #2d4739;
+    min-width: 70vw;
+    border-radius: 25px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.page-title > * {
+    text-align: center;
+}
+
+.page-subtitle {
+    align-self: center;
+    background-color: #2d4739;
+    min-width: 60vw;
+    border-radius: 25px;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    text-align: center;
+}
+
+.page-subtitle > * {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #1b6442 !important;
+    border-color: #000000 !important;
+}
+
+.text-home {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #ced37a !important;
 }
 
 h1, h2, h3 {
     font-family: 'Tenor Sans', sans-serif;
+    margin-bottom: 0rem !important; 
+
+}
+
+h1 {
+    font-size: 2rem !important;
+}
+
+h2 {
+    font-size: 1.5rem !important;
+}
+
+h3 {
+    font-size: 1.2rem !important;
+}
+
+.card {
+    background-color: #639a66 !important;
+    border-radius: 25px !important;
+    min-height: 46vh;
+}
+
+.card-body {
+    font-size: 20px;
+}
+
+.home-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 35vh;
+    gap: 10px;
+    justify-content: center;
+}
+
+.email {
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
 }
 
 .achievements {
@@ -53,12 +214,28 @@ h1, h2, h3 {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    width: 500px;
+    justify-content: center;
 }
 
 .achievement-images > * {
-    width: 16%;
-    height: 16%;
+    width: 20%;
+    height: 20%;
+}
+
+.achievement-image {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.achievement-image > * {
+    width: 32%;
+    height: 32%;
+}
+
+.description {
+    text-align: center;
 }
 
 .overlay {
@@ -107,13 +284,16 @@ h1, h2, h3 {
 
 .goals {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
 
 .goals-types {
     display: flex;
     flex-direction: column;
-    width: 300px
+    width: 70vw;
+    align-items: center;
+    align-self: center;
 }
 
 .goal-images {
@@ -129,6 +309,14 @@ h1, h2, h3 {
     flex-direction: column;
     width: 110px;
     align-self: center;
+}
+
+.goal-layout > * > div > h4 {
+    text-align: center;
+}
+
+.goal-layout > * > div {
+    text-align: center;
 }
 
 .goal {
@@ -152,7 +340,7 @@ h1, h2, h3 {
 
 .each {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
 }
 
@@ -174,28 +362,234 @@ h1, h2, h3 {
   gap: 10px;
 }
 
+/* Styling Articles */
+
+.individual-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.individual-content > *, .individual-content > * > div > h3 {
+    text-align: center;
+}
+
+.article-image {
+    width: 100%;
+}
+
+.article-image > * {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.article-author {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.article-date {
+    width: 100%;
+    font-size: 15px;
+    text-align: center;
+}
+
+.article-content {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.about-author {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.author-image {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
 @media screen and (min-width: 390px) {
 
   /* Larger Phones */
 
-  * {
-    color: blue;
-  }
+  .wellbeing-logo {
+    height: 75px;
+}
+
+.container {
+    padding-top: 130px;
+}
+
+.card {
+    min-height: 50vh;
+}
+
 }
 
 @media screen and (min-width: 768px) {
 
   /* Small Tablets */
 
-  * {
-    color: crimson;
-  }
+  .wellbeing-logo {
+    height: 125px;
+}
+
+.wellbeing-nav-text {
+    font-size: 30px;
+}
+
+.container {
+    padding-top: 175px;
+}
+
+.card {
+    min-height: 53vh;
+}
+
+.card-body {
+    font-size: 30px;
+}
+
+.page-title {
+    justify-content: left;
+}
+
+.home-wrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.text-home {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 50%;
+}
+
+.each {
+    flex-direction: row;
+}
+
+h1 {
+    font-size: 2.5rem !important;
+}
+
+h2 {
+    font-size: 2rem !important;
+}
+
+h3 {
+    font-size: 1.7rem !important;
+}
+
+.about-author {
+    font-size: 25px;
+}
+
+.article-content {
+    font-size: 20px;
+}
+
+.article-date {
+    font-size: 19px;
+}
+
+.article-image {
+    width: 75%;
+}
+
+.email {
+    
+    font-size: 20px;
+}
+
+.goal-layout {
+    width: 50%;
+}
+
+.goal-layout > * > div > div > img {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.goal-layout > * > div > div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+  
+}
+
+@media screen and (min-width: 1024px) {
+  /* Larger Devices */
+
+  .container {
+    padding-top: 190px;
+}
+
+.container-sm {
+    min-height: 80vh;
+}
+
+.card {
+    min-height: 63vh;
+}
+
+.goals-types {
+    flex-direction: column;
+    align-self: flex-start;
+}
+.goals {
+    flex-direction: row;
+}
+
+.email {
+    font-size: 30px;
+}
+
+.name {
+    font-size: 30px;
+}
+
+}
+
+.each {
+    font-size: 25px;
 }
 
 @media screen and (min-width: 1040px) {
-  /* Larger Devices & Computers */
-    
-  * {
-    color: black;
+    /* Computers */
+
+    .wellbeing-logo {
+        height: 100px;
+    }
+  
+    .container {
+      padding-top: 150px;
   }
+  
+  .container-sm {
+    justify-self: center;
+    min-height: 70vh;
+    min-width: 80vw;
+    margin-bottom: 10px;
+  }
+
+  .card {
+    min-height: 43vh;
 }
+
+.card-body {
+    font-size: 20px;
+}
+  
+  }
