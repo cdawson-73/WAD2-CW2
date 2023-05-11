@@ -7,12 +7,18 @@ To run locally, this site requires a number of dependancies which are detailed i
 Databases will be created upon the initiation of the application. An environment (dotenv) file will be needed with the following variables:
 
 USER - an email address to send password reset emails.
+
 PASS - the password for the email address.
+
 HOST - the host data for your email provider.
+
 EMAILPORT - the port on which the email should be sent (this data is usually found with the host info from the provider).
+
 SERVICE - the service name of the email provider.
+
 SECRET - a secret to allow the express session to work.
-SITEURL - the url of the main site.
+
+SITEURL - the url of the main site (the homepage URL without a / at the end, eg https://www.google.com, NOT https://www.google.com/).
 
 This website allows guests to view a home/about page, some useful links, a login page and a sign up page.
 
