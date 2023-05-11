@@ -12,6 +12,7 @@ HOST - the host data for your email provider.
 EMAILPORT - the port on which the email should be sent (this data is usually found with the host info from the provider).
 SERVICE - the service name of the email provider.
 SECRET - a secret to allow the express session to work.
+SITEURL - the url of the main site.
 
 This website allows guests to view a home/about page, some useful links, a login page and a sign up page.
 
