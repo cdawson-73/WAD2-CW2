@@ -44,5 +44,5 @@ app.use(bodyParser.urlencoded({
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-    console.warn(`App listening on http://localhost${PORT}. Ctrl C to exit.`)
+    console.warn(`App listening on ${process.env.SITEURL}${PORT}. Ctrl C to exit.`)
 });

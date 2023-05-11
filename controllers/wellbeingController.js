@@ -172,7 +172,8 @@ exports.post_forgot_password = function(req, res) {
                     var link;
                     var content;
                     var resetHash = user.passwordResetHash(password);
-                    link = "http://localhost:3000/new-password?email=" + email + "&key=" + resetHash;
+                    link = process.env.SITEURL + "/new-password?email=" + email + "&key=" + resetHash;
+                    //link = "http://localhost:3000/new-password?email=" + email + "&key=" + resetHash;
                     content = username + " you requested to reset your password. <a href='" + link + "'>Click this link to reset your password.</a>";
                     sendEmail(email, subject, content);
                     res.redirect('/login');
